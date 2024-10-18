@@ -31,7 +31,7 @@ class _BottomnavbarState extends State<Bottomnavbar> {
     ),
     const Center(
       child: Text(
-        'Home',
+        'Admin Dashboard',
         style: TextStyle(fontSize: 24, color: Colors.black),
       ),
     ),
@@ -57,28 +57,28 @@ class _BottomnavbarState extends State<Bottomnavbar> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home, color: Colors.blue,),
+            icon: Icon(Icons.home, color: Colors.green,),
             label: 'Home'
             
             ),
             BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag, color: Colors.blue,),
+            icon: Icon(Icons.miscellaneous_services, color: Colors.green,),
             label: 'Services'
-            
+        
             ),
             BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart, color: Colors.blue,),
+            icon: Icon(Icons.shopping_bag, color: Colors.green,),
             label: 'MarketPlace'
             
             ),
             BottomNavigationBarItem(
-            icon: Icon(Icons.person, color: Colors.blue,),
+            icon: Icon(Icons.person, color: Colors.green,),
             label: 'Admin'
             
             )
         ] ,
          currentIndex: _selectedIndex,
-         selectedItemColor: Colors.blue,
+         selectedItemColor: Colors.green,
          onTap: _onItemTapped,
 
         ),
