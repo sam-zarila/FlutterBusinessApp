@@ -10,7 +10,7 @@ class MarketService {
       final response = await http.post(
         Uri.parse('$baseUrl'),
         headers: {'Content-Type': 'application/json'},
-        body: jsonDecode(marketItem.toJson() as String),
+        body: jsonEncode(marketItem.toJson() ),
       );
 
       return response.statusCode == 201;

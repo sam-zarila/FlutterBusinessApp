@@ -1,6 +1,7 @@
 // pages/home_page.dart
 import 'package:flutter/material.dart';
 import '../pages/Admin_post.dart';
+import '../pages/Admin_post.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -28,7 +29,15 @@ class HomePage extends StatelessWidget {
                 Card(
                   elevation: 4,
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                          Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const PostMarket(),
+                          ),
+                        );
+                    
+                    },
                     child: const Padding(
                       padding: EdgeInsets.all(16.0),
                       child: Column(
@@ -54,10 +63,10 @@ class HomePage extends StatelessWidget {
                   elevation: 4,
                   child: InkWell(
                     onTap: () {
-                      // Navigator.push(
-                      //   /
-                      //   //  MaterialPageRoute(builder: (context)=> )
-                      // );
+                      Navigator.push(
+                        context,
+                         MaterialPageRoute(builder: (context)=> const PostMarket())
+                      );
                     },
                     child: const Padding(
                       padding: EdgeInsets.all(16.0),
