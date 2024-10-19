@@ -46,74 +46,108 @@ class _MarketPlacePageState extends State<MarketPlacePage> {
       appBar: AppBar(title: const Text('Market Place')),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              itemCount: _marketItems.length,
-              itemBuilder: (context, index) {
-                final marketItem = _marketItems[index];
-                return Card(
-                  elevation: 4,
-                  margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+          : Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, // Two cards per row
+                  crossAxisSpacing: 8.0,
+                  mainAxisSpacing: 8.0,
+                  childAspectRatio: 0.6, // Adjust to fit the card design
+                ),
+                itemCount: _marketItems.length,
+                itemBuilder: (context, index) {
+                  final marketItem = _marketItems[index];
+                  return Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    elevation: 3,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Display the image
-                        Container(
-                          height: 150,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            image: DecorationImage(
-                              image: NetworkImage(marketItem.image), // Load image from URL
-                              fit: BoxFit.cover,
-                            ),
+                        // Display the image with rounded corners
+                        ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                          ),
+                          child: Image.network(
+                            marketItem.image,
+                            height: 150,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
                           ),
                         ),
-                        const SizedBox(height: 10),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(height: 8),
+                              // Display name of the item
+                              Text(
+                                marketItem.name,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: 4),
 
-                        // Display name of the item
-                        Text(
-                          marketItem.name,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                              // Display provider
+                              Text(
+                                'Provider: ${marketItem.provider}',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
 
-                        // Display provider
-                        Text(
-                          'Provider: ${marketItem.provider}',
-                          style: const TextStyle(fontSize: 14, color: Colors.grey),
-                        ),
+                              // Display location
+                              Text(
+                                'Location: ${marketItem.location}',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
 
-                        // Display location
-                        Text(
-                          'Location: ${marketItem.location}',
-                          style: const TextStyle(fontSize: 14, color: Colors.grey),
-                        ),
+                              // Display price
+                              Text(
+                                'Price: ${marketItem.price} MWK',
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
 
-                        // Display price
-                        Text(
-                          'Price: ${marketItem.price} MWK',
-                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-
-                        const SizedBox(height: 10),
-
-                        // Add to cart button
-                        ElevatedButton(
-                          onPressed: () => _handleAddToCart(marketItem),
-                          child: const Text('Add to Cart'),
-                          style: ElevatedButton.styleFrom(
-                            minimumSize: const Size.fromHeight(40),
+                              // Add to cart button
+                              ElevatedButton.icon(
+                                onPressed: () => _handleAddToCart(marketItem),
+                                icon: const Icon(
+                                  Icons.shopping_cart,
+                                  color: Colors.white,
+                                ),
+                                label: const Text('Add to Cart'),
+                                style: ElevatedButton.styleFrom(
+                                  minimumSize: const Size.fromHeight(40),
+                                  backgroundColor: Colors.green,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
     );
   }
