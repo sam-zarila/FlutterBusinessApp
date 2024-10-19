@@ -30,22 +30,7 @@ class _BottomnavbarState extends State<Bottomnavbar> {
         style: TextStyle(fontSize: 24, color: Colors.black),
       ),
     ),
-<<<<<<< HEAD
-    AdminLogin(), // The login page should be displayed here when "Admin" is selected.
-=======
-    const Center(
-      child: Text(
-        'Admin Dashboard',
-        style: TextStyle(fontSize: 24, color: Colors.black),
-      ),
-    ),
-    const Center(
-      child: Text(
-        'Admin',
-        style: TextStyle(fontSize: 24, color: Colors.black),
-      ),
-    )
->>>>>>> 77eced41a45c68208f00e00c76e8f562c33908bf
+    AdminLogin(), // Updated to display AdminLogin for the Admin tab
   ];
 
   void _onItemTapped(int index) {
@@ -57,58 +42,32 @@ class _BottomnavbarState extends State<Bottomnavbar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_selectedIndex], // Display the selected page.
+      body: _selectedIndex < 3
+          ? _pages[_selectedIndex] // Display the selected page for Home, Services, and MarketPlace
+          : _pages[3], // Always show AdminLogin when the Admin tab is selected
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-<<<<<<< HEAD
-            icon: Icon(Icons.home, color: Colors.blue),
+            icon: Icon(Icons.home, color: Colors.green),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag, color: Colors.blue),
+            icon: Icon(Icons.miscellaneous_services, color: Colors.green),
             label: 'Services',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart, color: Colors.blue),
+            icon: Icon(Icons.shopping_bag, color: Colors.green),
             label: 'MarketPlace',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person, color: Colors.blue),
+            icon: Icon(Icons.person, color: Colors.green),
             label: 'Admin',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
+        selectedItemColor: Colors.green,
         onTap: _onItemTapped,
       ),
-=======
-            icon: Icon(Icons.home, color: Colors.green,),
-            label: 'Home'
-            
-            ),
-            BottomNavigationBarItem(
-            icon: Icon(Icons.miscellaneous_services, color: Colors.green,),
-            label: 'Services'
-        
-            ),
-            BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag, color: Colors.green,),
-            label: 'MarketPlace'
-            
-            ),
-            BottomNavigationBarItem(
-            icon: Icon(Icons.person, color: Colors.green,),
-            label: 'Admin'
-            
-            )
-        ] ,
-         currentIndex: _selectedIndex,
-         selectedItemColor: Colors.green,
-         onTap: _onItemTapped,
-
-        ),
->>>>>>> 77eced41a45c68208f00e00c76e8f562c33908bf
     );
   }
 }
