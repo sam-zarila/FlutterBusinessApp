@@ -30,7 +30,22 @@ class _BottomnavbarState extends State<Bottomnavbar> {
         style: TextStyle(fontSize: 24, color: Colors.black),
       ),
     ),
+<<<<<<< HEAD
     AdminLogin(), // The login page should be displayed here when "Admin" is selected.
+=======
+    const Center(
+      child: Text(
+        'Admin Dashboard',
+        style: TextStyle(fontSize: 24, color: Colors.black),
+      ),
+    ),
+    const Center(
+      child: Text(
+        'Admin',
+        style: TextStyle(fontSize: 24, color: Colors.black),
+      ),
+    )
+>>>>>>> 77eced41a45c68208f00e00c76e8f562c33908bf
   ];
 
   void _onItemTapped(int index) {
@@ -46,6 +61,7 @@ class _BottomnavbarState extends State<Bottomnavbar> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
+<<<<<<< HEAD
             icon: Icon(Icons.home, color: Colors.blue),
             label: 'Home',
           ),
@@ -66,6 +82,33 @@ class _BottomnavbarState extends State<Bottomnavbar> {
         selectedItemColor: Colors.blue,
         onTap: _onItemTapped,
       ),
+=======
+            icon: Icon(Icons.home, color: Colors.green,),
+            label: 'Home'
+            
+            ),
+            BottomNavigationBarItem(
+            icon: Icon(Icons.miscellaneous_services, color: Colors.green,),
+            label: 'Services'
+        
+            ),
+            BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_bag, color: Colors.green,),
+            label: 'MarketPlace'
+            
+            ),
+            BottomNavigationBarItem(
+            icon: Icon(Icons.person, color: Colors.green,),
+            label: 'Admin'
+            
+            )
+        ] ,
+         currentIndex: _selectedIndex,
+         selectedItemColor: Colors.green,
+         onTap: _onItemTapped,
+
+        ),
+>>>>>>> 77eced41a45c68208f00e00c76e8f562c33908bf
     );
   }
 }
