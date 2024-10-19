@@ -15,6 +15,7 @@ class AuthResponse {
   AuthResponse({required this.token});
 
   factory AuthResponse.fromJson(Map<String, dynamic> json) {
-    return AuthResponse(token: json['token']);
+    // Ensure that the 'access_token' matches the key from your backend response.
+    return AuthResponse(token: json['access_token']);
   }
 }
