@@ -1,6 +1,6 @@
 import 'package:business/pages/Admin.Login.dart';
 import 'package:flutter/material.dart';
-
+import '../pages/markaet_page.dart';
 class Bottomnavbar extends StatefulWidget {
   const Bottomnavbar({super.key});
 
@@ -24,13 +24,8 @@ class _BottomnavbarState extends State<Bottomnavbar> {
         style: TextStyle(fontSize: 24, color: Colors.black),
       ),
     ),
-    const Center(
-      child: Text(
-        'MarketPlace',
-        style: TextStyle(fontSize: 24, color: Colors.black),
-      ),
-    ),
-    AdminLogin(), // Updated to display AdminLogin for the Admin tab
+     MarketPlacePage(),
+    AdminLogin(),
   ];
 
   void _onItemTapped(int index) {
