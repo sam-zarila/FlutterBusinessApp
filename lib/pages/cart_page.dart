@@ -29,6 +29,8 @@ class CartPage extends StatelessWidget {
               return Center(
                 child: Text('Error:${snapshot.error}'),
               );
+            } else if(!snapshot.hasData || snapshot.data!.isEmpty ){
+
             }
           }),
     );
