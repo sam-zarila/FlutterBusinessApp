@@ -64,7 +64,24 @@ class CartPage extends StatelessWidget {
                    Padding(
                     padding: EdgeInsets.all(16.0),
                     child: Column(
-                      
+                      crossAxisAlignment: CrossAxisAlignment.start,
+
+                      children: [
+                        Text(
+                          'Total: \Mwk${total.toStringAsFixed(2)}',
+                          style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        ),
+                         const SizedBox(height: 8),
+                      ElevatedButton(
+                        onPressed: () {
+                          // Implement your checkout logic here
+                        },
+                        child: const Text('Checkout'),
+                      ),
+                      ],
                     ) ,
                     
                     )
