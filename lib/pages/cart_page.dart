@@ -26,7 +26,9 @@ class CartPage extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             } else if (snapshot.hasError) {
-              return Center();
+              return Center(
+                child: Text('Error:${snapshot.error}'),
+              );
             }
           }),
     );
