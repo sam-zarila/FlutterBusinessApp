@@ -1,5 +1,7 @@
 // ignore_for_file: unused_import
 
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import '../models/getMarket_model.dart'; // Ensure this is the correct model for the fetched items
 import '../services/getMarkets.dart';
@@ -139,24 +141,21 @@ import '../services/cart_service.dart';
 class MarketPage extends StatelessWidget {
   final CartService cartService = CartService('http://127.0.0.1:3000');
 
-   MarketPage({super.key});
+  MarketPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-
-      ),
+      appBar: AppBar(),
       body: const SingleChildScrollView(
         child: Column(
-          children: [
-
-          ],
+          children: [],
         ),
       ),
     );
   }
 }
+
 class MarketLists extends StatefulWidget {
   const MarketLists({super.key});
 
@@ -165,11 +164,25 @@ class MarketLists extends StatefulWidget {
 }
 
 class _MarketListsState extends State<MarketLists> {
-  late 
+  late Future<List<GetmarketModel>>
+      _getMarketModelFuture; // Adjust MarketModel as needed
+  final MarketService _marketService = MarketService();
+  final CartService _cartService = CartService('http://127.0.0.1:3000');
 
+  @override
+  void initState() {
+    super.initState();
+    _getMarketModelFuture = _marketService.fetchMarketItems();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return FutureBuilder(
+        future: _getMarketModelFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+        });
   }
 }
