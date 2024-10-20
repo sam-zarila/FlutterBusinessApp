@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import '../models/getMarket_model.dart'; // Ensure this is the correct model for the fetched items
 import '../services/getMarkets.dart'; import '../models/cart_model.dart';
 import '../services/cart_service.dart';
+import '../pages/markaet_page.dart';
 
 // class MarketPage extends StatelessWidget {
 //   final MarketService marketService = MarketService();
