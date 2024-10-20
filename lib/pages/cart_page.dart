@@ -3,7 +3,9 @@ import '../services/cart_service.dart';
 import 'package:flutter/material.dart';
 
 class CartPage extends StatelessWidget {
-  const CartPage({super.key});
+  final CartService cartService;
+
+  const CartPage({ required this.cartService,  super.key});
 
   @override
   Widget build(BuildContext context) {
