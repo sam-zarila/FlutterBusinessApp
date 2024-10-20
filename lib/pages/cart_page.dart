@@ -21,10 +21,17 @@ class CartPage extends StatelessWidget {
         centerTitle: true,
 
        ),
-       body: FutureBuilder<CartModel>>(
+       body: FutureBuilder<List<CartModel>>(
         
-        future: future,
-        builder: builder),
+        future: cartService.fetchCartItems(),
+        builder: (context,snapshot){
+           if () {
+             
+           } else {
+             
+           }
+
+        }),
     );
   }
 }
