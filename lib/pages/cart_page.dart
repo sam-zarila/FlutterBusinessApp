@@ -29,8 +29,16 @@ class CartPage extends StatelessWidget {
               return Center(
                 child: Text('Error:${snapshot.error}'),
               );
-            } else if(!snapshot.hasData || snapshot.data!.isEmpty ){
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return const Center(child: Text('your cart empty'));
+            } else {
+              final CartModel = snapshot.data!;
 
+              double total = 0.0;
+              for( var item in CartModel){
+                 total += double.parse(item.price.replaceAll(RegExp(r'[^0-9.]'), '')) * item.quantity;
+
+              }
             }
           }),
     );
