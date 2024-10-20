@@ -17,9 +17,14 @@ class CartPage extends StatelessWidget {
             fontWeight: FontWeight.bold,
             color: Colors.orange
           ),
-        
         ),
+        centerTitle: true,
+
        ),
+       body: FutureBuilder<CartModel>>(
+        
+        future: future,
+        builder: builder),
     );
   }
 }
