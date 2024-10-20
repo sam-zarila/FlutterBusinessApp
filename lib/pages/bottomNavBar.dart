@@ -1,6 +1,10 @@
 import 'package:business/pages/Admin.Login.dart';
 import 'package:flutter/material.dart';
 import '../pages/markaet_page.dart';
+// import service page
+
+
+
 class Bottomnavbar extends StatefulWidget {
   const Bottomnavbar({super.key});
 
@@ -18,13 +22,15 @@ class _BottomnavbarState extends State<Bottomnavbar> {
         style: TextStyle(fontSize: 24, color: Colors.black),
       ),
     ),
+    // delete this and add the serv
     const Center(
       child: Text(
         'Services',
         style: TextStyle(fontSize: 24, color: Colors.black),
       ),
     ),
-     MarketPlacePage(),
+
+     MarketPage(),
     AdminLogin(),
   ];
 
