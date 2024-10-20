@@ -25,7 +25,7 @@ class CartPage extends StatelessWidget {
         
         future: cartService.fetchCartItems(),
         builder: (context,snapshot){
-           if () {
+           if (snapshot.connectionState == ConnectionState.waiting) {
              
            } else {
              
