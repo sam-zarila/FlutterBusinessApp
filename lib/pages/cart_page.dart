@@ -19,81 +19,86 @@ class CartPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: FutureBuilder<List<CartModel>>(
-          future: cartService.fetchCartItems(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (snapshot.hasError) {
-              return Center(
-                child: Text('Error:${snapshot.error}'),
-              );
-            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return const Center(child: Text('your cart empty'));
-            } else {
-              final CartModel = snapshot.data!;
+        future: cartService.fetchCartItems(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('Error: ${snapshot.error}'),
+            );
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text('Your cart is empty'));
+          } else {
+            final cartItems = snapshot.data!;
 
-              double total = 0.0;
-              for (var item in CartModel) {
-                total += double.parse(
-                        item.price.replaceAll(RegExp(r'[^0-9.]'), '')) *
-                    item.quantity;
-              }
-              return Column(
-                children: [
-                  Expanded(
-                      child: ListView.builder(itemBuilder: (context, index) {
-                    return Card(
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 10.0),
-                      child: ListTile(
-                        leading: Image.network(CartModel[index].image,
-                            width: 50, height: 50, fit: BoxFit.cover),
-                        title: Text(CartModel[index].name), // Display name
-                        subtitle: Text(
-                            'Quantity: ${CartModel[index].quantity}\nPrice: ${CartModel[index].price}'), // Display quantity and price
-                        trailing: Text(
-                            'Total: \$${(double.parse(CartModel[index].price.replaceAll(RegExp(r'[^0-9.]'), '')) * CartModel[index].quantity).toStringAsFixed(2)}'),
-                      ),
-                    );
-                  }
-                  
-                  
-                  )),
-                   Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+            double total = 0.0;
+            for (var item in cartItems) {
+              total += double.parse(
+                      item.price.replaceAll(RegExp(r'[^0-9.]'), '')) *
+                  item.quantity;
+            }
 
-                      children: [
-                        Text(
-                          'Total: \Mwk${total.toStringAsFixed(2)}',
-                          style: const TextStyle(
+            return Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: cartItems.length,
+                    itemBuilder: (context, index) {
+                      final cartItem = cartItems[index];
+                      final itemTotal = double.parse(
+                              cartItem.price.replaceAll(RegExp(r'[^0-9.]'), '')) *
+                          cartItem.quantity;
+
+                      return Card(
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 10.0),
+                        child: ListTile(
+                          leading: Image.network(
+                            cartItem.image,
+                            width: 50,
+                            height: 50,
+                            fit: BoxFit.cover,
+                          ),
+                          title: Text(cartItem.name),
+                          subtitle: Text(
+                              'Quantity: ${cartItem.quantity}\nPrice: ${cartItem.price}'),
+                          trailing: Text(
+                              'Total: MWK ${itemTotal.toStringAsFixed(2)}'),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Total: MWK ${total.toStringAsFixed(2)}',
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
-                        ),
-                         const SizedBox(height: 8),
+                      ),
+                      const SizedBox(height: 8),
                       ElevatedButton(
                         onPressed: () {
                           // Implement your checkout logic here
                         },
                         child: const Text('Checkout'),
                       ),
-                      ],
-                    ) ,
-                    
-                    )
-                ],
-              );
-              
-            }
-           
+                    ],
+                  ),
+                ),
+              ],
+            );
           }
-          
-          
-          ),
+        },
+      ),
     );
   }
 }

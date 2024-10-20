@@ -4,6 +4,8 @@ import 'package:business/pages/Admin.Login.dart';
 import 'package:flutter/material.dart';
 import '../pages/markaet_page.dart';
 import '../pages/service_Page.dart';
+import '../pages/cart_page.dart';
+import '../services/cart_service.dart';
 // import service page
 
 class Bottomnavbar extends StatefulWidget {
@@ -25,6 +27,8 @@ class _BottomnavbarState extends State<Bottomnavbar> {
     ),
     // delete this and add the serv
     
+   // ignore: prefer_const_constructors
+
     const ServicePage(),
      MarketPage(),
     const AdminLogin(),
