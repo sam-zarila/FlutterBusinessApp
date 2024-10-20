@@ -1,10 +1,10 @@
-
-
 // ignore_for_file: unused_import
 
 import 'package:flutter/material.dart';
 import '../models/getMarket_model.dart'; // Ensure this is the correct model for the fetched items
 import '../services/getMarkets.dart';
+import '../models/cart_model.dart';
+import '../services/cart_service.dart';
 
 // class MarketPage extends StatelessWidget {
 //   final MarketService marketService = MarketService();
@@ -136,14 +136,38 @@ import '../services/getMarkets.dart';
 //   }
 // }
 
-class MarketPage extends StatefulWidget {
-  const MarketPage({super.key});
+class MarketPage extends StatelessWidget {
+  final CartService cartService = CartService('http://127.0.0.1:3000');
+
+   MarketPage({super.key});
 
   @override
-  State<MarketPage> createState() => _MarketPageState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+
+      ),
+      body: const SingleChildScrollView(
+        child: Column(
+          children: [
+
+          ],
+        ),
+      ),
+    );
+  }
+}
+class MarketLists extends StatefulWidget {
+  const MarketLists({super.key});
+
+  @override
+  State<MarketLists> createState() => _MarketListsState();
 }
 
-class _MarketPageState extends State<MarketPage> {
+class _MarketListsState extends State<MarketLists> {
+  late 
+
+
   @override
   Widget build(BuildContext context) {
     return const Placeholder();

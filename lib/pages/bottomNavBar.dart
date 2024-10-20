@@ -26,7 +26,7 @@ class _BottomnavbarState extends State<Bottomnavbar> {
     // delete this and add the serv
     
     const ServicePage(),
-    const MarketPage(),
+     MarketPage(),
     const AdminLogin(),
   ];
 
