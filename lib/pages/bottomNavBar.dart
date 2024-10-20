@@ -1,9 +1,10 @@
+// ignore_for_file: file_names
+
 import 'package:business/pages/Admin.Login.dart';
 import 'package:flutter/material.dart';
 import '../pages/markaet_page.dart';
+import '../pages/service_Page.dart';
 // import service page
-
-
 
 class Bottomnavbar extends StatefulWidget {
   const Bottomnavbar({super.key});
@@ -23,15 +24,10 @@ class _BottomnavbarState extends State<Bottomnavbar> {
       ),
     ),
     // delete this and add the serv
-    const Center(
-      child: Text(
-        'Services',
-        style: TextStyle(fontSize: 24, color: Colors.black),
-      ),
-    ),
-
-     MarketPage(),
-    AdminLogin(),
+    
+    const ServicePage(),
+    const MarketPage(),
+    const AdminLogin(),
   ];
 
   void _onItemTapped(int index) {
@@ -44,7 +40,8 @@ class _BottomnavbarState extends State<Bottomnavbar> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _selectedIndex < 3
-          ? _pages[_selectedIndex] // Display the selected page for Home, Services, and MarketPlace
+          ? _pages[
+              _selectedIndex] // Display the selected page for Home, Services, and MarketPlace
           : _pages[3], // Always show AdminLogin when the Admin tab is selected
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[

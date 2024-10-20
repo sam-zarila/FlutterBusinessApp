@@ -1,3 +1,6 @@
+// ignore: unused_import
+// ignore_for_file: file_names, unused_import, duplicate_ignore
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '../models/markret_model.dart';
@@ -88,7 +91,7 @@ class _PostMarketState extends State<PostMarket> {
                 ? const CircularProgressIndicator()
                 : ElevatedButton(
                     onPressed: _postMarketItem,
-                    child: const Text('Post Item'),
+                    child: const Text('Post Products'),
                   ),
           ],
         ),

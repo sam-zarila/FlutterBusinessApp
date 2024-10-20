@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_string_interpolations, avoid_print, file_names
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/getMarket_model.dart';
