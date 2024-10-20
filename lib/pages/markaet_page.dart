@@ -1,286 +1,149 @@
 
 
-// class MarketPlacePage extends StatefulWidget {
-//   const MarketPlacePage({super.key});
-
-//   @override
-//   State<MarketPlacePage> createState() => _MarketPlacePageState();
-// }
-
-// class _MarketPlacePageState extends State<MarketPlacePage> {
-//   final MarketService _marketService = MarketService();
-//   List<GetmarketModel> _marketItems = [];
-//   bool _isLoading = true;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _fetchMarketItems();
-//   }
-
-//   Future<void> _fetchMarketItems() async {
-//     try {
-//       final items = await _marketService.fetchMarketItems();
-//       setState(() {
-//         _marketItems = items;
-//         _isLoading = false;
-//       });
-//     } catch (e) {
-//       print('Error fetching market items: $e');
-//       setState(() {
-//         _isLoading = false;
-//       });
-//     }
-//   }
-
-//   void _handleAddToCart(GetmarketModel item) {
-//     // Implement the logic to add the item to the cart
-//     print('Adding ${item.name} to the cart');
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: const Text('Market Place')),
-//       body: _isLoading
-//           ? const Center(child: CircularProgressIndicator())
-//           : Padding(
-//               padding: const EdgeInsets.all(8.0),
-//               child: GridView.builder(
-//                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-//                   crossAxisCount: 2, // Two cards per row
-//                   crossAxisSpacing: 8.0,
-//                   mainAxisSpacing: 8.0,
-//                   childAspectRatio: 0.7, // Adjust to fit the card design
-//                 ),
-//                 itemCount: _marketItems.length,
-//                 itemBuilder: (context, index) {
-//                   final marketItem = _marketItems[index];
-//                   return Card(
-//                     shape: RoundedRectangleBorder(
-//                       borderRadius: BorderRadius.circular(10),
-//                     ),
-//                     elevation: 3,
-//                     child: Column(
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: [
-//                         // Display the image with rounded corners
-//                         ClipRRect(
-//                           borderRadius: const BorderRadius.only(
-//                             topLeft: Radius.circular(10),
-//                             topRight: Radius.circular(10),
-//                           ),
-//                           child: Image.network(
-//                             marketItem.image,
-//                             height: 150,
-//                             width: double.infinity,
-//                             fit: BoxFit.cover,
-//                           ),
-//                         ),
-//                         Padding(
-//                           padding: const EdgeInsets.all(8.0),
-//                           child: Column(
-//                             crossAxisAlignment: CrossAxisAlignment.start,
-//                             children: [
-//                               const SizedBox(height: 8),
-//                               // Display name of the item
-//                               Text(
-//                                 marketItem.name,
-//                                 style: const TextStyle(
-//                                   fontSize: 18,
-//                                   fontWeight: FontWeight.bold,
-//                                 ),
-//                                 maxLines: 1,
-//                                 overflow: TextOverflow.ellipsis,
-//                               ),
-//                               const SizedBox(height: 4),
-
-//                               // Display provider
-//                               Text(
-//                                 'Provider: ${marketItem.provider}',
-//                                 style: const TextStyle(
-//                                   fontSize: 14,
-//                                   color: Colors.grey,
-//                                 ),
-//                               ),
-//                               const SizedBox(height: 4),
-
-//                               // Display location
-//                               Text(
-//                                 'Location: ${marketItem.location}',
-//                                 style: const TextStyle(
-//                                   fontSize: 14,
-//                                   color: Colors.grey,
-//                                 ),
-//                               ),
-//                               const SizedBox(height: 4),
-
-//                               // Display price
-//                               Text(
-//                                 'Price: ${marketItem.price} MWK',
-//                                 style: const TextStyle(
-//                                   fontSize: 16,
-//                                   fontWeight: FontWeight.bold,
-//                                 ),
-//                               ),
-//                               const SizedBox(height: 8),
-
-//                               // Add to cart button
-//                               ElevatedButton.icon(
-//                                 onPressed: () => _handleAddToCart(marketItem),
-//                                 icon: const Icon(
-//                                   Icons.shopping_cart,
-//                                   color: Colors.white,
-//                                 ),
-//                                 label: const Text('Add to Cart'),
-//                                 style: ElevatedButton.styleFrom(
-//                                   minimumSize: const Size.fromHeight(40),
-//                                   backgroundColor: Colors.green,
-//                                 ),
-//                               ),
-//                             ],
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                   );
-//                 },
-//               ),
-//             ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
 import '../models/getMarket_model.dart'; // Ensure this is the correct model for the fetched items
 import '../services/getMarkets.dart';
 
-class MarketPage extends StatelessWidget {
-  final MarketService marketService = MarketService();
+// class MarketPage extends StatelessWidget {
+//   final MarketService marketService = MarketService();
 
-  MarketPage({super.key});
+//   MarketPage({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text('Market Items'),
+//       ),
+//       body: const SingleChildScrollView(
+//         child: Column(
+//           children: [
+//             SizedBox(height: 16),
+//             Text(
+//               'Available Items',
+//               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+//             ),
+//             MarketLists(),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+// class MarketLists extends StatefulWidget {
+//   const MarketLists({super.key});
+
+//   @override
+//   State<MarketLists> createState() => _MarketListsState();
+// }
+
+// class _MarketListsState extends State<MarketLists> {
+//   late Future<List<GetmarketModel>> _marketFuture;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _marketFuture = MarketService().fetchMarketItems();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return FutureBuilder<List<GetmarketModel>>(
+//       future: _marketFuture,
+//       builder: (context, snapshot) {
+//         if (snapshot.connectionState == ConnectionState.waiting) {
+//           return const Center(child: CircularProgressIndicator());
+//         } else if (snapshot.hasError) {
+//           return Center(child: Text('Error: ${snapshot.error}'));
+//         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+//           return const Center(child: Text('No items available'));
+//         } else {
+//           final marketItems = snapshot.data!;
+
+//           return Padding(
+//             padding: const EdgeInsets.all(10),
+//             child: GridView.builder(
+//               shrinkWrap: true,
+//               physics: const NeverScrollableScrollPhysics(),
+//               itemCount: marketItems.length,
+//               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+//                 crossAxisCount: 2,
+//                 crossAxisSpacing: 10,
+//                 mainAxisSpacing: 10,
+//                 childAspectRatio: 0.65,
+//               ),
+//               itemBuilder: (context, index) {
+//                 return MarketItemCard(marketItem: marketItems[index]);
+//               },
+//             ),
+//           );
+//         }
+//       },
+//     );
+//   }
+// }
+
+// class MarketItemCard extends StatelessWidget {
+//   final GetmarketModel marketItem;
+
+//   const MarketItemCard({required this.marketItem, super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Card(
+//       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+//       elevation: 3,
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           ClipRRect(
+//             borderRadius: const BorderRadius.only(
+//               topLeft: Radius.circular(10),
+//               topRight: Radius.circular(10),
+//             ),
+//             child: Image.network(
+//               marketItem.image,
+//               height: 120,
+//               width: double.infinity,
+//               fit: BoxFit.cover,
+//             ),
+//           ),
+//           Padding(
+//             padding: const EdgeInsets.all(8.0),
+//             child: Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 Text(
+//                   marketItem.name,
+//                   style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+//                   maxLines: 1,
+//                   overflow: TextOverflow.ellipsis,
+//                 ),
+//                 const SizedBox(height: 4),
+//                 Text(
+//                   'Price: ${marketItem.price}',
+//                   style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+class MarketPage extends StatefulWidget {
+  const MarketPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Market Items'),
-      ),
-      body: const SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(height: 16),
-            Text(
-              'Available Items',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            MarketLists(),
-          ],
-        ),
-      ),
-    );
-  }
+  State<MarketPage> createState() => _MarketPageState();
 }
 
-class MarketLists extends StatefulWidget {
-  const MarketLists({super.key});
-
-  @override
-  State<MarketLists> createState() => _MarketListsState();
-}
-
-class _MarketListsState extends State<MarketLists> {
-  late Future<List<GetmarketModel>> _marketFuture;
-
-  @override
-  void initState() {
-    super.initState();
-    _marketFuture = MarketService().fetchMarketItems();
-  }
-
+class _MarketPageState extends State<MarketPage> {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<GetmarketModel>>(
-      future: _marketFuture,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
-        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('No items available'));
-        } else {
-          final marketItems = snapshot.data!;
-
-          return Padding(
-            padding: const EdgeInsets.all(10),
-            child: GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: marketItems.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                childAspectRatio: 0.65,
-              ),
-              itemBuilder: (context, index) {
-                return MarketItemCard(marketItem: marketItems[index]);
-              },
-            ),
-          );
-        }
-      },
-    );
-  }
-}
-
-class MarketItemCard extends StatelessWidget {
-  final GetmarketModel marketItem;
-
-  const MarketItemCard({required this.marketItem, super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      elevation: 3,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(10),
-              topRight: Radius.circular(10),
-            ),
-            child: Image.network(
-              marketItem.image,
-              height: 120,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  marketItem.name,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  'Price: ${marketItem.price}',
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+    return const Placeholder();
   }
 }
