@@ -13,17 +13,15 @@ class CartService {
     final response = await http.post(
       Uri.parse(url),
       headers: {
-        'content-Type': 'application/json',
+        'Content-Type': 'application/json',
       },
-      body: json.encode(cartItem.toJson),
+      body: json.encode(cartItem.toJson()), // Corrected to call toJson() as a function
     );
 
     if (response.statusCode == 200 || response.statusCode == 201) {
-      print('Response body:${response.body}');
-
-      return;
+      print('Response body: ${response.body}');
     } else {
-      throw Exception('failed to add items to cart:${response.body}');
+      throw Exception('Failed to add items to cart: ${response.body}');
     }
   }
 
@@ -38,7 +36,7 @@ class CartService {
           .toList()
           .cast<CartModel>();
     } else {
-      throw Exception('failed to fetch cart items:${response.body}');
+      throw Exception('Failed to fetch cart items: ${response.body}');
     }
   }
 }
