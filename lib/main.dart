@@ -5,7 +5,8 @@ void main() {
   runApp(const MaterialApp(
     
    
-    home: Bottomnavbar(),
+    home:BottomNavbar (),
   ));
 }
 
+ 

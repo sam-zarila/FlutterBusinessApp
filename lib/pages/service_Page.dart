@@ -2,9 +2,6 @@
 
 import 'dart:convert';
 import 'dart:math';
-
-//import 'dart:nativewrappers/_internal/vm/lib/math_patch.dart';
-
 import 'package:flutter/material.dart';
 
 class ServicePage extends StatelessWidget {
@@ -14,7 +11,8 @@ class ServicePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Welcome to the shop'),
+        title: const Text('Welcome to the Shop'),
+        backgroundColor: Colors.black, // Set AppBar color to black
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -37,20 +35,10 @@ class ServicePage extends StatelessWidget {
                           ),
                         );
                       },
-                      child: const SummaryCard(
+                      child: _buildSummaryCard(
                         title: 'PHARMACY',
-                        content: Column(
-                          children: [
-                            Icon(Icons.medical_information,
-                                size: 60.0,
-                                color: Colors.blue), // Changed to blue
-                            Text(
-                              'PILLS',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            Text(''),
-                          ],
-                        ),
+                        icon: Icons.medical_information,
+                        subtitle: 'PILLS',
                       ),
                     ),
                   ),
@@ -65,20 +53,10 @@ class ServicePage extends StatelessWidget {
                           ),
                         );
                       },
-                      child: const SummaryCard(
+                      child: _buildSummaryCard(
                         title: 'DRINK SHOP',
-                        content: Column(
-                          children: [
-                            Icon(Icons.shop,
-                                size: 60.0,
-                                color: Colors.blue), // Changed to blue
-                            Text(
-                              'SOFT DRINKS OR LIQUOR',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            Text(''),
-                          ],
-                        ),
+                        icon: Icons.shop,
+                        subtitle: 'SOFT DRINKS OR LIQUOR',
                       ),
                     ),
                   ),
@@ -101,26 +79,11 @@ class ServicePage extends StatelessWidget {
                           ),
                         );
                       },
-                      child: const SummaryCard(
+                      child: _buildSummaryCard(
                         title: 'TAXI DRIVER',
-                        content: Column(
-                          children: [
-                            Icon(Icons.drive_eta,
-                                size: 60.0,
-                                color: Colors.blue), // Changed to blue
-                            SizedBox(height: 16.0),
-                            Text(
-                              'Reliable rides with professional drivers.',
-                              style: TextStyle(color: Colors.white),
-                              textAlign: TextAlign.center,
-                            ),
-                            Text(
-                              'Available 24/7 in your area.',
-                              style: TextStyle(color: Colors.white),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
+                        icon: Icons.drive_eta,
+                        subtitle: 'Reliable rides with professional drivers.',
+                        additionalInfo: 'Available 24/7 in your area.',
                       ),
                     ),
                   ),
@@ -130,20 +93,10 @@ class ServicePage extends StatelessWidget {
                       onTap: () {
                         // Perform any actions when services are tapped
                       },
-                      child: const SummaryCard(
+                      child: _buildSummaryCard(
                         title: 'DIGITAL SERVICES',
-                        content: Column(
-                          children: [
-                            Icon(Icons.miscellaneous_services,
-                                size: 60.0, color: Colors.blue), // Kept blue
-                            SizedBox(height: 16.0),
-                            Text(
-                              'Printing and Mobile Money',
-                              style: TextStyle(color: Colors.white),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
+                        icon: Icons.miscellaneous_services,
+                        subtitle: 'Printing and Mobile Money',
                       ),
                     ),
                   ),
@@ -164,39 +117,82 @@ class ServicePage extends StatelessWidget {
                           ),
                         );
                       },
-                      child: const SummaryCard(
+                      child: _buildSummaryCard(
                         title: 'AGNESS MANYOWA',
-                        content: Column(
-                          children: [
-                            Icon(Icons.grass,
-                                size: 60.0,
-                                color: Colors.blue), // Changed to blue
-                            SizedBox(height: 16.0),
-                            Text(
-                              '420',
-                              style: TextStyle(color: Colors.white),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
+                        icon: Icons.grass,
+                        subtitle: '420',
                       ),
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 32.0),
-
-              // See All Categories Button
-             
-                ///child: const Text('See All Categories'),
-            
             ],
           ),
         ),
       ),
     );
   }
+
+  // Method to build the summary card with Apple design
+  Widget _buildSummaryCard({
+    required String title,
+    required IconData icon,
+    required String subtitle,
+    String? additionalInfo,
+  }) {
+    return Card(
+      color: Colors.black, // Card background color
+      elevation: 4, // Shadow for elevation effect
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16.0), // Rounded corners
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            Icon(
+              icon,
+              size: 60.0,
+              color: Colors.blue, // Icon color
+            ),
+            const SizedBox(height: 8.0),
+            Text(
+              title,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 4.0),
+            Text(
+              subtitle,
+              style: const TextStyle(
+                color: Colors.white70,
+                fontSize: 14.0,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            if (additionalInfo != null) ...[
+              const SizedBox(height: 4.0),
+              Text(
+                additionalInfo,
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 12.0,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
 }
+
 
 class PharmacyScreen extends StatelessWidget {
   const PharmacyScreen({super.key});

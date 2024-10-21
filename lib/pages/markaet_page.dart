@@ -1,10 +1,10 @@
 // ignore_for_file: unused_import, use_build_context_synchronously
 
-
-
+import 'package:business/orders/orderspage.dart';
 import 'package:flutter/material.dart';
 import '../models/getMarket_model.dart'; // Ensure this is the correct model for the fetched items
-import '../services/getMarkets.dart'; import '../models/cart_model.dart';
+import '../services/getMarkets.dart';
+import '../models/cart_model.dart';
 import '../services/cart_service.dart';
 import '../pages/markaet_page.dart';
 
@@ -317,18 +317,28 @@ class ListingCard extends StatelessWidget {
                     style: TextStyle(
                       color: Colors.white,
                     ),
-                    
                   ),
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size.fromHeight(30),
                     backgroundColor: Colors.green,
                   ),
-                  
                 ),
                 const SizedBox(height: 4),
                 ElevatedButton.icon(
                   onPressed: () {
-                    
+                    final double price =
+                        double.tryParse(getmarketModel.price) ?? 0.0;
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => OrdersPage(
+                          itemName: getmarketModel.name,
+                          price: price,
+                          imageUrl: getmarketModel.image, // Passing image
+                        ),
+                      ),
+                    );
                   },
                   icon: const Icon(
                     Icons.shopping_basket,
@@ -339,13 +349,11 @@ class ListingCard extends StatelessWidget {
                     style: TextStyle(
                       color: Colors.white,
                     ),
-                    
                   ),
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size.fromHeight(30),
                     backgroundColor: Colors.orange,
                   ),
-                  
                 ),
               ],
             ),
