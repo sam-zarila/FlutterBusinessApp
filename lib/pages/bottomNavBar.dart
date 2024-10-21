@@ -6,7 +6,6 @@ import '../pages/markaet_page.dart';
 import '../pages/service_Page.dart';
 import '../pages/cart_page.dart';
 import '../services/cart_service.dart';
-// import service page
 
 class Bottomnavbar extends StatefulWidget {
   const Bottomnavbar({super.key});
@@ -25,13 +24,10 @@ class _BottomnavbarState extends State<Bottomnavbar> {
         style: TextStyle(fontSize: 24, color: Colors.black),
       ),
     ),
-    // delete this and add the serv
-    
-   // ignore: prefer_const_constructors
-
     const ServicePage(),
-     MarketPage(),
+    MarketPage(),
     const AdminLogin(),
+    CartPage(cartService: CartService('http://127.0.0.1:3000')),
   ];
 
   void _onItemTapped(int index) {
@@ -43,10 +39,7 @@ class _BottomnavbarState extends State<Bottomnavbar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _selectedIndex < 3
-          ? _pages[
-              _selectedIndex] // Display the selected page for Home, Services, and MarketPlace
-          : _pages[3], // Always show AdminLogin when the Admin tab is selected
+      body: _pages[_selectedIndex], // Display the selected page based on the index
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -61,6 +54,10 @@ class _BottomnavbarState extends State<Bottomnavbar> {
             icon: Icon(Icons.shopping_bag, color: Colors.green),
             label: 'MarketPlace',
           ),
+           BottomNavigationBarItem(
+      icon: Icon(Icons.shopping_cart, color: Colors.green),
+      label: 'Cart', // Add label for Cart
+    ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person, color: Colors.green),
             label: 'Admin',

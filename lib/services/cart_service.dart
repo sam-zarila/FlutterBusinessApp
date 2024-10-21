@@ -1,6 +1,9 @@
+// ignore_for_file: avoid_print
+
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../models/cart_model.dart';
+import 'dart:math';
 
 class CartService {
   final String baseUrl;
@@ -40,3 +43,8 @@ class CartService {
     }
   }
 }
+
+// Usage of Random
+extension on Random {
+}
+
