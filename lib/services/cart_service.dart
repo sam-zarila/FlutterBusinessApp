@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../models/cart_model.dart';
@@ -18,7 +16,7 @@ class CartService {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: json.encode(cartItem.toJson()), // Corrected to call toJson() as a function
+      body: json.encode(cartItem.toJson()),
     );
 
     if (response.statusCode == 200 || response.statusCode == 201) {
@@ -44,7 +42,9 @@ class CartService {
   }
 }
 
-// Usage of Random
-extension on Random {
-}
+// Usage example
+void main() {
+  final cartService = CartService('https://busines265.onrender.com'); // Use the online URL
 
+  // You can now use cartService.addTocart() and cartService.fetchCartItems()
+}
