@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import '../models/getMarket_model.dart';
 
 class MarketService {
-  final String baseUrl = 'http://127.0.0.1:3000/marketlisting';
+  final String baseUrl = 'https://busines265.onrender.com/marketlisting';
 
   Future<List<GetmarketModel>> fetchMarketItems() async {
     try {

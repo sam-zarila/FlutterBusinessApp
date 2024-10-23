@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import '../models/markret_model.dart';
 
 class MarketService {
-  final String baseUrl = 'http://127.0.0.1:3000/marketlisting';
+  final String baseUrl = 'https://busines265.onrender.com/marketlisting';
 
   Future<bool> createMarketItem(MarkretModel marketItem) async {
     try {
