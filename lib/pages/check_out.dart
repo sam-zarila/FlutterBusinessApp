@@ -2,11 +2,19 @@ import '../models/cart_model.dart';
 import 'package:flutter/material.dart';
 
 class CheckoutPage extends StatelessWidget {
-  const CheckoutPage({super.key});
+     final List<CartModel> cartModels;
+     final double total;
+
+
+  const CheckoutPage({
+    required this.cartModels,
+    required this.total,
+    
+    super.key});
 
   @override
   Widget build(BuildContext context) {
-    final List<CartModel> cartModels;
+ 
     return const Placeholder();
   }
 }
