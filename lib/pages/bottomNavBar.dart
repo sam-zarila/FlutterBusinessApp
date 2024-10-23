@@ -71,7 +71,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
             BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart,
                   color: _selectedIndex == 4 ? Colors.blue : Colors.white),
-              label: 'Cart',
+              label: 'My Cart',
             ),
           ],
           currentIndex: _selectedIndex,
