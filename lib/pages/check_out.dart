@@ -6,7 +6,7 @@ class CheckoutPage extends StatelessWidget {
      final double total;
 
 
-  const CheckoutPage({
+   CheckoutPage({
     required this.cartModels,
     required this.total,
     
@@ -16,6 +16,11 @@ class CheckoutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     final TextEditingController nameController = TextEditingController();
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController phoneController = TextEditingController();
+    final TextEditingController locationController = TextEditingController();
+    final TextEditingController deliveryOptionController = TextEditingController();
  
     return const Placeholder();
   }
