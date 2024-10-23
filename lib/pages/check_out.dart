@@ -12,6 +12,8 @@ class CheckoutPage extends StatelessWidget {
     
     super.key});
 
+    final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
  
