@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../theme.dart';
 
-
-class SignUpPage extends StatelessWidget {
+class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,9 +11,9 @@ class SignUpPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Welcome!", style: AppTheme.headline),
+            Text("Welcome Back!", style: AppTheme.headline),
             SizedBox(height: 10),
-            Text("Start your journey today.", style: AppTheme.subheadline),
+            Text("Continue your journey with us.", style: AppTheme.subheadline),
             SizedBox(height: 30),
             _buildTextField("Enter your email"),
             SizedBox(height: 10),
@@ -29,14 +28,16 @@ class SignUpPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(25),
                 ),
               ),
-              child: Text("Create Your Account", style: AppTheme.buttonStyle),
+              child: Text("Login", style: AppTheme.buttonStyle),
             ),
+            SizedBox(height: 20),
+            Text("Issues with your login?"),
             SizedBox(height: 20),
             Text("or"),
             SizedBox(height: 10),
             _buildSocialButtons(),
             SizedBox(height: 20),
-            Text("Already have an account? Sign in."),
+            Text("Don’t have an account? Sign up."),
           ],
         ),
       ),

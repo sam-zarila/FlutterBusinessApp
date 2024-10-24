@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import './pages/bottomNavBar.dart';
+
+// import './pages/bottomNavBar.dart';
 
 void main() {
   runApp(const MaterialApp(
     
    
-    home:BottomNavbar (),
+    // home:BottomNavbar (),
   ));
 }
 
