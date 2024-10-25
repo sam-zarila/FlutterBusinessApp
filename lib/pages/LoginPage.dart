@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../theme.dart';
+import '../pages/signUp.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -11,11 +12,11 @@ class LoginPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Welcome Back!", style: AppTheme.headline),
+            Text("Welcome ", style: AppTheme.headline),
             SizedBox(height: 10),
-            Text("Continue your journey with us.", style: AppTheme.subheadline),
+            Text("Shop From anyWhere any Time.", style: AppTheme.subheadline),
             SizedBox(height: 30),
-            _buildTextField("Enter your email"),
+            _buildTextField("Enter your username"),
             SizedBox(height: 10),
             _buildTextField("Enter your password", isPassword: true),
             SizedBox(height: 20),
@@ -35,9 +36,16 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 20),
             Text("or"),
             SizedBox(height: 10),
-            _buildSocialButtons(),
+          
             SizedBox(height: 20),
-            Text("Don’t have an account? Sign up."),
+           TextButton(
+            onPressed: () {
+              
+            },
+            child: Text(
+              'Dont have an account? Sign up'
+            ),
+           )
           ],
         ),
       ),
@@ -57,26 +65,6 @@ class LoginPage extends StatelessWidget {
         filled: true,
         fillColor: Colors.white,
       ),
-    );
-  }
-
-  Widget _buildSocialButtons() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        IconButton(
-          icon: FaIcon(FontAwesomeIcons.google),
-          onPressed: () {},
-        ),
-        IconButton(
-          icon: FaIcon(FontAwesomeIcons.facebook),
-          onPressed: () {},
-        ),
-        IconButton(
-          icon: FaIcon(FontAwesomeIcons.apple),
-          onPressed: () {},
-        ),
-      ],
     );
   }
 }
