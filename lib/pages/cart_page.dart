@@ -1,13 +1,17 @@
 import '../models/cart_model.dart';
 import '../services/cart_service.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart'; // Import intl package for currency formatting
 
 class CartPage extends StatelessWidget {
   final CartService cartService;
   final int userId; // Add userId to the class
 
   const CartPage({
-    required this.cartService, required this.userId, super.key}); // Add userId to constructor
+    required this.cartService,
+    required this.userId,
+    super.key,
+  }); // Add userId to constructor
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +39,11 @@ class CartPage extends StatelessWidget {
             return const Center(child: Text('Your cart is empty'));
           } else {
             final cartItems = snapshot.data!;
-
             double total = 0.0;
+
+            // Calculate the total without using replaceAll
             for (var item in cartItems) {
-              total += double.parse(
-                      item.price.replaceAll(RegExp(r'[^0-9.]'), '')) *
-                  item.quantity;
+              total += item.price * item.quantity; // Directly use item.price
             }
 
             return Column(
@@ -50,9 +53,7 @@ class CartPage extends StatelessWidget {
                     itemCount: cartItems.length,
                     itemBuilder: (context, index) {
                       final cartItem = cartItems[index];
-                      final itemTotal = double.parse(
-                              cartItem.price.replaceAll(RegExp(r'[^0-9.]'), '')) *
-                          cartItem.quantity;
+                      final itemTotal = cartItem.price * cartItem.quantity; // Directly use item.price
 
                       return Card(
                         margin: const EdgeInsets.symmetric(
@@ -66,9 +67,9 @@ class CartPage extends StatelessWidget {
                           ),
                           title: Text(cartItem.name),
                           subtitle: Text(
-                              'Quantity: ${cartItem.quantity}\nPrice: ${cartItem.price}'),
+                              'Quantity: ${cartItem.quantity}\nPrice: MWK ${NumberFormat("#,##0.00").format(cartItem.price)}'), // Format price
                           trailing: Text(
-                              'Total: MWK ${itemTotal.toStringAsFixed(2)}'),
+                              'Total: MWK ${NumberFormat("#,##0.00").format(itemTotal)}'), // Format total
                         ),
                       );
                     },
@@ -80,7 +81,7 @@ class CartPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Total: MWK ${total.toStringAsFixed(2)}',
+                        'Total: MWK ${NumberFormat("#,##0.00").format(total)}', // Format total
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
