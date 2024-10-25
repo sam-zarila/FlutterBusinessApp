@@ -40,10 +40,12 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 20),
            TextButton(
             onPressed: () {
+              Navigator.push(
+                context, MaterialPageRoute(builder: (context) => SignUpPage()));
               
             },
             child: Text(
-              'Dont have an account? Sign up'
+              'Don\'t have an account? Sign up'
             ),
            )
           ],
