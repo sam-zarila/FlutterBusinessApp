@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../theme.dart';
 import '../pages/signUp.dart';
+import '../pages/bottomNavBar.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -21,7 +21,9 @@ class LoginPage extends StatelessWidget {
             _buildTextField("Enter your password", isPassword: true),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                // TODO: Implement login logic
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppTheme.orange,
                 padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
@@ -31,13 +33,7 @@ class LoginPage extends StatelessWidget {
               ),
               child: Text("Login", style: AppTheme.buttonStyle),
             ),
-            SizedBox(height: 20),
-            Text("Issues with your login?"),
-            SizedBox(height: 20),
-            Text("or"),
-            SizedBox(height: 10),
-          
-            SizedBox(height: 20),
+            
            TextButton(
             onPressed: () {
               Navigator.push(
