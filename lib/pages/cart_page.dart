@@ -6,7 +6,8 @@ class CartPage extends StatelessWidget {
   final CartService cartService;
   final int userId; // Add userId to the class
 
-  const CartPage({required this.cartService, required this.userId, super.key}); // Add userId to constructor
+  const CartPage({
+    required this.cartService, required this.userId, super.key}); // Add userId to constructor
 
   @override
   Widget build(BuildContext context) {

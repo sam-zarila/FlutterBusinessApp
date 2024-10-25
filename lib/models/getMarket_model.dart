@@ -5,7 +5,7 @@ class GetmarketModel {
   final String image;
   final String name;
   final String provider;
-  final String price;
+  final double price;
   final String location;
 
   GetmarketModel({

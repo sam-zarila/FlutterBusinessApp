@@ -1,8 +1,8 @@
 // ignore_for_file: file_names
 
+import 'package:business/pages/markaet_page.dart';
 import 'package:flutter/material.dart';
 import '../pages/Admin.Login.dart';
-import '../pages/markaet_page.dart';
 import '../pages/service_Page.dart';
 import '../pages/cart_page.dart';
 import '../services/cart_service.dart';
@@ -16,19 +16,28 @@ class BottomNavbar extends StatefulWidget {
 
 class _BottomNavbarState extends State<BottomNavbar> {
   int _selectedIndex = 0;
+  late final List<Widget> _pages;
 
-  final List<Widget> _pages = <Widget>[
-    const Center(
-      child: Text(
-        'Home',
-        style: TextStyle(fontSize: 24, color: Colors.white),
+  @override
+  void initState() {
+    super.initState();
+    // Initialize pages
+    _pages = <Widget>[
+      const Center(
+        child: Text(
+          'Home',
+          style: TextStyle(fontSize: 24, color: Colors.white),
+        ),
       ),
-    ),
-    const ServicePage(),
-    MarketPage(),
-    const AdminLogin(),
-    CartPage(cartService: CartService('http://127.0.0.1:3000')),
-  ];
+      const ServicePage(),
+      MarketPage(),
+      const AdminLogin(),
+      CartPage(
+        cartService: CartService('http://10.0.2.2:3000'), // Base URL
+        userId: 1, // Change this as needed
+      ),
+    ];
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -43,8 +52,9 @@ class _BottomNavbarState extends State<BottomNavbar> {
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           color: Colors.black,
-          border:
-              Border(top: BorderSide(color: Colors.grey.shade800, width: 0.5)),
+          border: Border(
+            top: BorderSide(color: Colors.grey.shade800, width: 0.5),
+          ),
         ),
         child: BottomNavigationBar(
           items: [

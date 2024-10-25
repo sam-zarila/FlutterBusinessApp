@@ -19,14 +19,14 @@ class CartService {
     );
 
     if (response.statusCode == 200 || response.statusCode == 201) {
-      print('Response body: ${response.body}');
+      print('Item added to cart: ${response.body}');
     } else {
       throw Exception('Failed to add items to cart: ${response.body}');
     }
   }
 
   Future<List<CartModel>> fetchCartItems(int userId) async {
-    final url = '$baseUrl/cart/$userId'; // Adjusted to include userId
+    final url = '$baseUrl/cart/$userId'; // Ensure this is the correct endpoint
 
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
@@ -36,6 +36,11 @@ class CartService {
           .toList()
           .cast<CartModel>();
     } else {
+      // Handle 404 error more gracefully
+      if (response.statusCode == 404) {
+        print('No cart items found for user ID $userId');
+        return []; // Return an empty list if no items are found
+      }
       throw Exception('Failed to fetch cart items: ${response.body}');
     }
   }

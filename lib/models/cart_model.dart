@@ -4,7 +4,7 @@ class CartModel {
   final String image;
   final String name;
   final String provider;
-  final String price;
+  final double price; // Change from String to double
   final String location;
 
   CartModel({
@@ -13,18 +13,18 @@ class CartModel {
     required this.image,
     required this.name,
     required this.provider,
-    required this.price,
+    required this.price, // Adjusted type here
     required this.location,
   });
 
   Map<String, dynamic> toJson() {
     return {
       'item': item,
-      'quantity': quantity, // Corrected the typo here
+      'quantity': quantity,
       'image': image,
-      'name': name, // Added name to the JSON map
+      'name': name,
       'provider': provider,
-      'price': price,
+      'price': price, // Now it's a double
       'location': location,
     };
   }
@@ -36,7 +36,9 @@ class CartModel {
       image: json['image'],
       name: json['name'],
       provider: json['provider'],
-      price: json['price'],
+      price: (json['price'] is String) 
+          ? double.tryParse(json['price']) ?? 0.0 // Safely parse if it's still a string
+          : json['price']?.toDouble() ?? 0.0, // Assume it's a number if not a string
       location: json['location'],
     );
   }
