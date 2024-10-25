@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 
 class CartPage extends StatelessWidget {
   final CartService cartService;
+  final int userId; // Add userId to the class
 
-  const CartPage({required this.cartService, super.key});
+  const CartPage({required this.cartService, required this.userId, super.key}); // Add userId to constructor
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class CartPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: FutureBuilder<List<CartModel>>(
-        future: cartService.fetchCartItems(),
+        future: cartService.fetchCartItems(userId), // Pass userId to fetchCartItems
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

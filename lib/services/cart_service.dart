@@ -1,7 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../models/cart_model.dart';
-import 'dart:math';
 
 class CartService {
   final String baseUrl;
@@ -26,8 +25,8 @@ class CartService {
     }
   }
 
-  Future<List<CartModel>> fetchCartItems() async {
-    final url = '$baseUrl/cart';
+  Future<List<CartModel>> fetchCartItems(int userId) async {
+    final url = '$baseUrl/cart/$userId'; // Adjusted to include userId
 
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
@@ -40,11 +39,4 @@ class CartService {
       throw Exception('Failed to fetch cart items: ${response.body}');
     }
   }
-}
-
-// Usage example
-void main() {
-  final cartService = CartService('https://busines265.onrender.com'); // Use the online URL
-
-  // You can now use cartService.addTocart() and cartService.fetchCartItems()
 }

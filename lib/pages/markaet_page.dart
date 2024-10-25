@@ -46,7 +46,7 @@ class MarketLists extends StatefulWidget {
 class _MarketListsState extends State<MarketLists> {
   late Future<List<GetmarketModel>> _getMarketModelFuture;
   final MarketService _marketService = MarketService();
-  final CartService _cartService = CartService('https://busines265.onrender.com');
+  final CartService _cartService = CartService('http://10.0.2.2:3000/marketlisting');
 
   @override
   void initState() {
