@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../theme.dart';
-
+import '../pages/LoginPage.dart';
 
 class SignUpPage extends StatelessWidget {
   @override
@@ -17,6 +17,8 @@ class SignUpPage extends StatelessWidget {
             Text("Start your journey today.", style: AppTheme.subheadline),
             SizedBox(height: 30),
             _buildTextField("Enter your email"),
+            SizedBox(height: 30),
+            _buildTextField("Enter your name"),
             SizedBox(height: 10),
             _buildTextField("Enter your password", isPassword: true),
             SizedBox(height: 20),
@@ -32,11 +34,13 @@ class SignUpPage extends StatelessWidget {
               child: Text("Create Your Account", style: AppTheme.buttonStyle),
             ),
             SizedBox(height: 20),
-            Text("or"),
-            SizedBox(height: 10),
-            _buildSocialButtons(),
-            SizedBox(height: 20),
-            Text("Already have an account? Sign in."),
+            TextButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LoginPage()));
+              },
+              child: Text('Already have account? Login'),
+            )
           ],
         ),
       ),
@@ -56,26 +60,6 @@ class SignUpPage extends StatelessWidget {
         filled: true,
         fillColor: Colors.white,
       ),
-    );
-  }
-
-  Widget _buildSocialButtons() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        IconButton(
-          icon: FaIcon(FontAwesomeIcons.google),
-          onPressed: () {},
-        ),
-        IconButton(
-          icon: FaIcon(FontAwesomeIcons.facebook),
-          onPressed: () {},
-        ),
-        IconButton(
-          icon: FaIcon(FontAwesomeIcons.apple),
-          onPressed: () {},
-        ),
-      ],
     );
   }
 }
