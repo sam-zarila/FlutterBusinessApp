@@ -10,10 +10,26 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _currentIndex = 0;
+
+  final List<String> imgList = [
+    'assets/98.jpg',
+    'assets/kick.jpg',
+    'assets/max.jpg',
+    'assets/kick2.jpg'
+  ];
+
   
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            
+          ],
+        ),
+      ),
+    );
   }
 }
