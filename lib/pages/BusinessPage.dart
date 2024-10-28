@@ -18,7 +18,7 @@ class _HomeState extends State<Home> {
     'assets/kick2.jpg'
   ];
 
-  
+  final List<String> categories = ['Lifestyle', 'Running', 'Tennis'];
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,11 @@ class _HomeState extends State<Home> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            
+            SizedBox(height: 20),
+
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20))
+
           ],
         ),
       ),
