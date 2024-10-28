@@ -10,10 +10,10 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
   final List<String> imgList = [
-      'assets/98.jpg',
-      'assets/kick.jpg',
-      'assets/max.jpg',
-      'assets/kick2.jpg'
+    'assets/98.jpg',
+    'assets/kick.jpg',
+    'assets/max.jpg',
+    'assets/kick2.jpg'
   ];
 
   final List<String> categories = ['Lifestyle', 'Running', 'Tennis'];
@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             // Search bar
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Expanded(
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
                       decoration: BoxDecoration(
                         color: Colors.grey[200],
                         borderRadius: BorderRadius.circular(10),
@@ -54,61 +54,64 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 15),
-                  Icon(Icons.shopping_bag_outlined, color: Colors.grey),
+                  const SizedBox(width: 15),
+                  const Icon(Icons.shopping_bag_outlined, color: Colors.grey),
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             // Sliding banner for "New Collection"
             CarouselSlider(
               options: CarouselOptions(
+                height: 200,
                 autoPlay: true,
                 enlargeCenterPage: true,
+                viewportFraction: 0.9,
                 onPageChanged: (index, reason) {
                   setState(() {
                     _currentIndex = index;
                   });
                 },
               ),
-              items: imgList
-                  .map((item) => Container(
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(item),
-                            fit: BoxFit.cover,
-                          ),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(15.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "New Collection",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                "Nike Air Presto",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ],
+              items: imgList.map((item) {
+                return Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(item),
+                      fit: BoxFit.cover,
+                    ),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: const Padding(
+                    padding: EdgeInsets.all(15.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "New Collection",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ))
-                  .toList(),
+                        Text(
+                          "Nike Air Presto",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }).toList(),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             // Category section
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -119,12 +122,12 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Text(
                               category,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             Container(
                               width: 60,
                               height: 60,
@@ -138,7 +141,7 @@ class _HomePageState extends State<HomePage> {
                     .toList(),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             // Products section
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -152,17 +155,17 @@ class _HomePageState extends State<HomePage> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   GridView.builder(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       childAspectRatio: 0.75,
                       crossAxisSpacing: 20,
                       mainAxisSpacing: 20,
                     ),
-                    itemCount: 4,
+                    itemCount: imgList.length,
                     itemBuilder: (context, index) {
                       return ProductCard(
                         image: imgList[index % imgList.length],
@@ -222,12 +225,12 @@ class ProductCard extends StatelessWidget {
               children: [
                 Text(
                   name,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 Text(
                   price,
                   style: TextStyle(

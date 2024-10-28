@@ -6,6 +6,7 @@ import '../pages/Admin.Login.dart';
 import '../pages/service_Page.dart';
 import '../pages/cart_page.dart';
 import '../services/cart_service.dart';
+import '../pages/BusinessPage.dart';
 
 class BottomNavbar extends StatefulWidget {
   const BottomNavbar({super.key});
@@ -23,12 +24,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
     super.initState();
     // Initialize pages
     _pages = <Widget>[
-      const Center(
-        child: Text(
-          'Home',
-          style: TextStyle(fontSize: 24, color: Colors.white),
-        ),
-      ),
+      HomePage(),
       const ServicePage(),
       MarketPage(),
       const AdminLogin(),
