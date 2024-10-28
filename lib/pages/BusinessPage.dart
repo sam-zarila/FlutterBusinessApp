@@ -10,10 +10,10 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
   final List<String> imgList = [
-      assets/98.jpg
-      assets/kick.jpg
-      assets/max.jpg
-     assets/kick2.jpg
+      'assets/98.jpg',
+      'assets/kick.jpg',
+      'assets/max.jpg',
+      'assets/kick2.jpg'
   ];
 
   final List<String> categories = ['Lifestyle', 'Running', 'Tennis'];
