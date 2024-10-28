@@ -29,7 +29,13 @@ class _HomeState extends State<Home> {
             SizedBox(height: 20),
 
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20))
+              padding: EdgeInsets.symmetric(horizontal: 20),
+               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+               ),
+              ),
+
+              
 
           ],
         ),
