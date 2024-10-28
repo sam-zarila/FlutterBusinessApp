@@ -21,6 +21,7 @@ dev_dependencies:
     sdk: flutter
   intl: ^0.18.0  # Move intl here, not nested under flutter_test
   flutter_lints: ^4.0.0
+  carousel_slider: ^4.2.0
 
 flutter:
   uses-material-design: true
