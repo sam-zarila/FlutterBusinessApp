@@ -22,16 +22,21 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
                child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                children: [
+                  Expanded(
+                  child: Container(),)
+                ],
                ),
               ),
 
