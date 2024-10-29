@@ -7,6 +7,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
+  late PageController _pageController;
 
   final List<String> imgList = [
     'assets/98.jpg',
@@ -16,6 +17,18 @@ class _HomePageState extends State<HomePage> {
   ];
 
   final List<String> categories = ['Lifestyle', 'Running', 'Tennis'];
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: _currentIndex);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +76,7 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 200,
               child: PageView.builder(
+                controller: _pageController,
                 itemCount: imgList.length,
                 onPageChanged: (index) {
                   setState(() {
@@ -113,9 +127,16 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: imgList.asMap().entries.map((entry) {
                 return GestureDetector(
-                  onTap: () => setState(() {
-                    _currentIndex = entry.key;
-                  }),
+                  onTap: () {
+                    setState(() {
+                      _currentIndex = entry.key;
+                    });
+                    _pageController.animateToPage(
+                      entry.key,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                    );
+                  },
                   child: Container(
                     width: 8.0,
                     height: 8.0,
@@ -216,6 +237,14 @@ class ProductCard extends StatelessWidget {
     required this.price,
   }) : super(key: key);
 
+  void addToCart() {
+    print("Added to cart");
+  }
+
+  void placeOrder() {
+    print("Order placed");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -257,6 +286,32 @@ class ProductCard extends StatelessWidget {
                     fontSize: 16,
                     color: Colors.grey[600],
                   ),
+                ),
+                const SizedBox(height: 10),
+                Column(
+                  children: [
+                    ElevatedButton(
+                      onPressed: addToCart,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.orange,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: const Text("Add to Cart"),
+                    ),
+                    const SizedBox(height: 5),
+                    ElevatedButton(
+                      onPressed: placeOrder,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: const Text("Order"),
+                    ),
+                  ],
                 ),
               ],
             ),
