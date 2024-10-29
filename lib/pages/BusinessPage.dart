@@ -29,7 +29,7 @@
 //     _pageController.dispose();
 //     super.dispose();
 //   }
-// // 
+// //
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
@@ -329,28 +329,27 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-    int _currentIndex = 0;
+  int _currentIndex = 0;
   late PageController _pageController;
-  
 
-  final List<String> images = [
-     'assets/98.jpg',
-     'assets/kick.jpg',
-     'assets/max.jpg',
-     'assets/kick2.jpg'
+  final List<String> imgList = [
+    'assets/98.jpg',
+    'assets/kick.jpg',
+    'assets/max.jpg',
+    'assets/kick2.jpg'
   ];
 
   @override
   void initState() {
-   super.initState();
-      _pageController = PageController(initialPage: _currentIndex);
-   }
+    super.initState();
+    _pageController = PageController(initialPage: _currentIndex);
+  }
 
   @override
   void dispose() {
-     _pageController.dispose();     super.dispose();
+    _pageController.dispose();
+    super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -365,7 +364,8 @@ class _HomePageState extends State<HomePage> {
               radius: 20,
             ),
             const SizedBox(width: 10),
-            const Text("Hello, Sam Zarila", style: TextStyle(color: Colors.black)),
+            const Text("Hello, Sam Zarila",
+                style: TextStyle(color: Colors.black)),
           ],
         ),
         actions: [
@@ -380,7 +380,6 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: SingleChildScrollView(
-        
         // child: Column(
         //   crossAxisAlignment: CrossAxisAlignment.start,
         //   children: [
@@ -396,16 +395,36 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             SizedBox(
-               height: 200,
-               child: PageView.builder(
-                itemBuilder: ),
-
-              )
+              height: 200,
+              child: PageView.builder(
+                  controller: _pageController,
+                  itemCount: imgList.length,
+                  onPageChanged: (index) {
+                    setState(() {
+                      _currentIndex = index;
+                    });
+                  },
+                  itemBuilder: (contex, index) {
+                    return Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 10.0),
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(imgList[index]),
+                          fit: BoxFit.cover,
+                        ),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(15),
+                        child: ,
+                        
+                        ),
+                    );
+                  }),
+            )
           ],
         ),
       ),
-
-      
     );
   }
 
@@ -414,14 +433,14 @@ class _HomePageState extends State<HomePage> {
     return SizedBox(
       height: 180,
       child: PageView.builder(
-        itemCount: images.length,
+        itemCount: imgList.length,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15),
               child: Image.asset(
-                images[index],
+                imgList[index],
                 fit: BoxFit.cover,
               ),
             ),
@@ -468,7 +487,8 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text("New Arrival", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          const Text("New Arrival",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           const SizedBox(height: 10),
           GridView.builder(
             shrinkWrap: true,
