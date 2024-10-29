@@ -329,10 +329,28 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+    int _currentIndex = 0;
+  late PageController _pageController;
+  
+
   final List<String> images = [
-    'assets/kick2.jpg',
-    'assets/max.jpg',
+     'assets/98.jpg',
+     'assets/kick.jpg',
+     'assets/max.jpg',
+     'assets/kick2.jpg'
   ];
+
+
+   @override
+  void initState() {
+     super.initState();
+    _pageController = PageController(initialPage: _currentIndex);   }
+
+//   @override
+//   void dispose() {
+//     _pageController.dispose();
+//     super.dispose();
+//   }
 
   @override
   Widget build(BuildContext context) {
@@ -343,7 +361,7 @@ class _HomePageState extends State<HomePage> {
         title: Row(
           children: [
             CircleAvatar(
-              backgroundImage: AssetImage('assets/business/profile.jpg'),
+              backgroundImage: AssetImage('assets/kick3.jpg'),
               radius: 20,
             ),
             const SizedBox(width: 10),
