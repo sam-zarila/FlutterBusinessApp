@@ -340,17 +340,17 @@ class _HomePageState extends State<HomePage> {
      'assets/kick2.jpg'
   ];
 
-
-   @override
+  @override
   void initState() {
-     super.initState();
-    _pageController = PageController(initialPage: _currentIndex);   }
+   super.initState();
+      _pageController = PageController(initialPage: _currentIndex);
+   }
 
-//   @override
-//   void dispose() {
-//     _pageController.dispose();
-//     super.dispose();
-//   }
+  @override
+  void dispose() {
+     _pageController.dispose();     super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
