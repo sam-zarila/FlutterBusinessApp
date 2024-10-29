@@ -419,12 +419,62 @@ class _HomePageState extends State<HomePage> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'New Arrivals',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold
+                              ),
+                            ),
+                            Text(
+                              'Nike Air Max 98',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ],
                         ),
                         
                         ),
                     );
                   }),
-            )
+            ),
+            const SizedBox(height: 20),
+//             // Dots indicator
+           Row(
+//               mainAxisAlignment: MainAxisAlignment.center,
+//               children: imgList.asMap().entries.map((entry) {
+//                 return GestureDetector(
+//                   onTap: () {
+//                     setState(() {
+//                       _currentIndex = entry.key;
+//                     });
+//                     _pageController.animateToPage(
+//                       entry.key,
+//                       duration: const Duration(milliseconds: 300),
+//                       curve: Curves.easeInOut,
+//                     );
+//                   },
+//                   child: Container(
+//                     width: 8.0,
+//                     height: 8.0,
+//                     margin: const EdgeInsets.symmetric(
+//                         vertical: 10.0, horizontal: 4.0),
+//                     decoration: BoxDecoration(
+//                       shape: BoxShape.circle,
+//                       color: _currentIndex == entry.key
+//                           ? Colors.black
+//                           : Colors.grey,
+//                     ),
+//                   ),
+//                 );
+//               }).toList(),
+           )
+
           ],
         ),
       ),
