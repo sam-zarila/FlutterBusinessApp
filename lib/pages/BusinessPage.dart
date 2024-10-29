@@ -380,19 +380,32 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: SingleChildScrollView(
+        
+        // child: Column(
+        //   crossAxisAlignment: CrossAxisAlignment.start,
+        //   children: [
+        //     // Banner Section
+        //     _buildBannerSection(),
+        //     // Category Section
+        //     _buildCategorySection(),
+        //     // New Arrivals Section
+        //     _buildNewArrivalsSection(),
+        //     const SizedBox(height: 20),
+        //   ],
+        // ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Banner Section
-            _buildBannerSection(),
-            // Category Section
-            _buildCategorySection(),
-            // New Arrivals Section
-            _buildNewArrivalsSection(),
-            const SizedBox(height: 20),
+            SizedBox(
+               height: 200,
+               child: PageView.builder(
+                itemBuilder: ),
+
+              )
           ],
         ),
       ),
+
+      
     );
   }
 
