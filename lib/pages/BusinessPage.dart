@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -60,52 +59,73 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const SizedBox(height: 20),
-            // Sliding banner for "New Collection"
-            CarouselSlider(
-              options: CarouselOptions(
-                height: 200,
-                autoPlay: true,
-                enlargeCenterPage: true,
-                viewportFraction: 0.9,
-                onPageChanged: (index, reason) {
+            // Sliding banner for "New Collection" using PageView
+            SizedBox(
+              height: 200,
+              child: PageView.builder(
+                itemCount: imgList.length,
+                onPageChanged: (index) {
                   setState(() {
                     _currentIndex = index;
                   });
                 },
-              ),
-              items: imgList.map((item) {
-                return Container(
-                  width: MediaQuery.of(context).size.width,
-                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(item),
-                      fit: BoxFit.cover,
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 10.0),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(imgList[index]),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.circular(15),
                     ),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(15.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "New Collection",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
+                    child: const Padding(
+                      padding: EdgeInsets.all(15.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "New Collection",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        Text(
-                          "Nike Air Presto",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
+                          Text(
+                            "Nike Air Presto",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            const SizedBox(height: 20),
+            // Dots indicator
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: imgList.asMap().entries.map((entry) {
+                return GestureDetector(
+                  onTap: () => setState(() {
+                    _currentIndex = entry.key;
+                  }),
+                  child: Container(
+                    width: 8.0,
+                    height: 8.0,
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 10.0, horizontal: 4.0),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: _currentIndex == entry.key
+                          ? Colors.black
+                          : Colors.grey,
                     ),
                   ),
                 );
