@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 class HomePage extends StatefulWidget {
   @override
@@ -8,6 +9,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
   late PageController _pageController;
+  late Timer _timer;
 
   final List<String> imgList = [
     'assets/98.jpg',
@@ -24,20 +26,24 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _startAutoSlide() {
-    Future.delayed(const Duration(seconds: 2), () {
+    _timer = Timer.periodic(const Duration(seconds: 2), (Timer timer) {
       if (_pageController.hasClients) {
-        _pageController.nextPage(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-        );
+        setState(() {
+          _currentIndex = (_currentIndex + 1) % imgList.length;
+          _pageController.animateToPage(
+            _currentIndex,
+            duration: const Duration(milliseconds: 400),
+            curve: Curves.easeInOut,
+          );
+        });
       }
-      _startAutoSlide();
     });
   }
 
   @override
   void dispose() {
     _pageController.dispose();
+    _timer.cancel(); // Stop the timer when disposing the page
     super.dispose();
   }
 
@@ -192,6 +198,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   // Product Card Widget with Popup Buttons
+  // Product Card Widget with Popup Buttons
   Widget _buildProductCard(String image, String name, String price) {
     return Card(
       color: Colors.green[50],
@@ -200,13 +207,19 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
+          // Expanded image section to fill the entire width
+          AspectRatio(
+            aspectRatio: 1.0, // Adjust the aspect ratio as desired
             child: ClipRRect(
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(10),
                 topRight: Radius.circular(10),
               ),
-              child: Image.asset(image, fit: BoxFit.cover),
+              child: Image.asset(
+                image,
+                fit: BoxFit.cover, // Ensures the image covers the entire width
+                width: double.infinity, // Forces image to fill the card width
+              ),
             ),
           ),
           Padding(
@@ -222,7 +235,8 @@ class _HomePageState extends State<HomePage> {
                     style: const TextStyle(
                         color: Colors.orange, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 5),
-                Center(
+                Align(
+                  alignment: Alignment.center,
                   child: PopupMenuButton(
                     icon: const Icon(Icons.add_circle, color: Colors.green),
                     itemBuilder: (context) => [
