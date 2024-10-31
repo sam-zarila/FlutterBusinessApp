@@ -8,7 +8,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
   late PageController _pageController;
-
   final List<String> imgList = [
     'assets/98.jpg',
     'assets/kick.jpg',
@@ -32,7 +31,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.green,
         elevation: 0,
         title: Row(
           children: [
@@ -41,17 +40,17 @@ class _HomePageState extends State<HomePage> {
               radius: 20,
             ),
             const SizedBox(width: 10),
-            const Text("Hello, Sam Zarila",
-                style: TextStyle(color: Colors.black)),
+            const Text("Busines is Busines",
+                style: TextStyle(color: Colors.white)),
           ],
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.notifications, color: Colors.black),
+            icon: Icon(Icons.notifications, color: Colors.white),
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(Icons.settings, color: Colors.black),
+            icon: Icon(Icons.settings, color: Colors.white),
             onPressed: () {},
           ),
         ],
@@ -60,7 +59,6 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Banner Section
             SizedBox(
               height: 200,
               child: PageView.builder(
@@ -111,7 +109,6 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const SizedBox(height: 20),
-            // Dots indicator
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: imgList.asMap().entries.map((entry) {
@@ -134,16 +131,14 @@ class _HomePageState extends State<HomePage> {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: _currentIndex == entry.key
-                          ? Colors.black
+                          ? Colors.green
                           : Colors.grey,
                     ),
                   ),
                 );
               }).toList(),
             ),
-            // Category Section
             _buildCategorySection(),
-            // New Arrivals Section
             _buildNewArrivalsSection(),
             const SizedBox(height: 20),
           ],
@@ -152,10 +147,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // Category Section
   Widget _buildCategorySection() {
     final categories = ["Essentials", "Delivery", "Top Picks", "Trending"];
-
     return Padding(
       padding: const EdgeInsets.only(left: 15, top: 20),
       child: SizedBox(
@@ -168,7 +161,7 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.only(right: 10),
               child: Chip(
                 label: Text(categories[index]),
-                backgroundColor: Colors.blueAccent.withOpacity(0.1),
+                backgroundColor: Colors.green.withOpacity(0.1),
               ),
             );
           },
@@ -177,13 +170,11 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // New Arrivals Section
   Widget _buildNewArrivalsSection() {
     final products = [
       {"image": "assets/98.jpg", "name": "Product 1", "price": "\$30"},
       {"image": "assets/kick.jpg", "name": "Product 2", "price": "\$50"},
     ];
-
     return Padding(
       padding: const EdgeInsets.all(15),
       child: Column(
@@ -215,36 +206,75 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // Product Card Widget
   Widget _buildProductCard(String image, String name, String price) {
-    return Card(
-      elevation: 3,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
+    bool showOptions = false;
+    return StatefulBuilder(
+      builder: (context, setState) {
+        return Card(
+          elevation: 3,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                  ),
+                  child: Image.asset(image, fit: BoxFit.cover),
+                ),
               ),
-              child: Image.asset(image, fit: BoxFit.cover),
-            ),
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
+                    const SizedBox(height: 5),
+                    Text(price, style: const TextStyle(color: Colors.green)),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: IconButton(
+                        icon: Icon(Icons.add_circle, color: Colors.orange),
+                        onPressed: () {
+                          setState(() {
+                            showOptions = !showOptions;
+                          });
+                        },
+                      ),
+                    ),
+                    if (showOptions)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              // Add to Cart logic
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.green,
+                            ),
+                            child: Text("Add to Cart"),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              // View Details logic
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.orange,
+                            ),
+                            child: Text("View Details"),
+                          ),
+                        ],
+                      ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
-                const SizedBox(height: 5),
-                Text(price, style: const TextStyle(color: Colors.blueAccent)),
-              ],
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
