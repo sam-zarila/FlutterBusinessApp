@@ -19,14 +19,24 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  intl: ^0.18.0  # Move intl here, not nested under flutter_test
+  intl: ^0.18.0
   flutter_lints: ^4.0.0
   carousel_slider: ^4.2.0
 
 flutter:
   uses-material-design: true
   assets:
-    - assets/98.jpg
-    - assets/kick.jpg
-    - assets/max.jpg
-    - assets/kick2.jpg
+    - assets/paychangu.jpg
+    - assets/print-services.png
+    - assets/R.png
+    - assets/OIP.jpg
+    - assets/B.jpg
+    - assets/Happy.jpg
+    - assets/football.jpg
+    - assets/mpamba_logo.png
+    - assets/airtel_logo.png
+    - assets/MO626.png
+
+    
+
+    

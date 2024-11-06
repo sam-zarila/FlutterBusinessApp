@@ -10,7 +10,7 @@ class SignUpPage extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
 
   Future<void> registerUser(String name, String email, String password, BuildContext context) async {
-    final url = Uri.parse('http://10.0.2.2:3000/user/register');
+    final url = Uri.parse('http://127.0.0.1:3000/user/register');
 
     // Input validation
     if (name.isEmpty || email.isEmpty || password.isEmpty) {

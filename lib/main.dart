@@ -1,6 +1,7 @@
+import 'package:business/pages/BusinessPage.dart';
 import 'package:flutter/material.dart';
 import 'theme.dart';
-import './pages/LoginPage.dart';
+//import './pages/LoginPage.dart';
 import './pages/signUp.dart';
 // import './pages/bottomNavBar.dart';
 
@@ -12,7 +13,7 @@ void main() {
     theme: AppTheme.theme,
     initialRoute: '/',
     routes: {
-      '/': (context) => LoginPage(),
+      '/': (context) => HomePage(),
       '/signup': (context) => SignUpPage(),
       // '/bottomnavbar': (context) => BottomNavbar(),
     },

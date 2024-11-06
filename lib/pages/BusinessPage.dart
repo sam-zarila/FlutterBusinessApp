@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -8,24 +9,106 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
   late PageController _pageController;
+  Timer? _timer;
 
-  final List<String> imgList = [
-    'assets/98.jpg',
-    'assets/kick.jpg',
-    'assets/max.jpg',
-    'assets/kick2.jpg'
+  String _greeting = '';
+  bool _isEnglish = true;
+
+  final List<BannerModel> banners = [
+    BannerModel(
+      imagePath: 'assets/Happy.jpg',
+      title: 'Happy Shopping',
+      description: 'Enjoy seamless shopping in our app',
+    ),
+    BannerModel(
+      imagePath: 'assets/paychangu.jpg',
+      title: 'Payments',
+      description: 'Payments are secured by PayChangu',
+    ),
+    BannerModel(
+      imagePath: 'assets/print-services.png',
+      title: 'Print Services',
+      description: 'High-quality printing solutions',
+    ),
+    BannerModel(
+      imagePath: 'assets/R.png',
+      title: 'Order Food',
+      description: 'Delicious meals delivered to you in time',
+    ),
+    BannerModel(
+      imagePath: 'assets/football.jpg',
+      title: 'New season 2024/5 Jersey',
+      description: 'order quality jersey from Jersey Centre',
+    ),
+    BannerModel(
+      imagePath: 'assets/OIP.jpg',
+      title: 'Uber & Taxi Services',
+      description: 'Call taxi and Uber anytime, available 24/7',
+    ),
   ];
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: _currentIndex);
+    _startAutoSlide();
+    _updateGreeting();
+    _startGreetingTimer();
   }
 
   @override
   void dispose() {
     _pageController.dispose();
+    _timer?.cancel();
     super.dispose();
+  }
+
+  void _updateGreeting() {
+    final hour = DateTime.now().hour;
+    String greetingMessage;
+
+    if (hour < 12) {
+      greetingMessage = _isEnglish
+          ? "Good morning! What are you buying today?"
+          : "Mwadzuka bwanji Akasi! Mutigula chani lero?";
+    } else if (hour < 17) {
+      greetingMessage = _isEnglish
+          ? "Good afternoon! How about buying something?"
+          : "Mwaswera bwanji Akasi! Kodi mwatigulako lero?";
+    } else {
+      greetingMessage = _isEnglish
+          ? "Good evening! Close the day with a purchase!"
+          : "Madzulo abwino!mudya chani Madzulo ano? ";
+    }
+
+    setState(() {
+      _greeting = greetingMessage;
+    });
+  }
+
+  void _startGreetingTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 5), (Timer timer) {
+      setState(() {
+        _isEnglish = !_isEnglish;
+      });
+      _updateGreeting();
+    });
+  }
+
+  void _startAutoSlide() {
+    _timer = Timer.periodic(const Duration(seconds: 3), (Timer timer) {
+      if (_currentIndex < banners.length - 1) {
+        _currentIndex++;
+      } else {
+        _currentIndex = 0;
+      }
+
+      _pageController.animateToPage(
+        _currentIndex,
+        duration: const Duration(milliseconds: 350),
+        curve: Curves.easeIn,
+      );
+    });
   }
 
   @override
@@ -35,15 +118,17 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Colors.green,
         elevation: 0,
-        title: Row(
+        title: const Row(
           children: [
             CircleAvatar(
-              backgroundImage: AssetImage('assets/kick3.jpg'),
+              backgroundImage: AssetImage('assets/B.jpg'),
               radius: 20,
             ),
-            const SizedBox(width: 10),
-            const Text("Business Hub",
-                style: TextStyle(color: Colors.white, fontSize: 20)),
+            SizedBox(width: 10),
+            Text(
+              "Business Hub",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
           ],
         ),
         actions: [
@@ -61,32 +146,24 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildSearchBar(),
             _buildPromotionalBanner(),
             _buildDotsIndicator(),
             _buildCategorySection(),
-            _buildPopularProductsSection(),
-            _buildNewArrivalsSection(),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: AnimatedSwitcher(
+                duration: const Duration(seconds: 1),
+                child: Text(
+                  _greeting,
+                  key: ValueKey<String>(_greeting),
+                  style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            _buildProductCardsSection(),
             const SizedBox(height: 20),
+            _buildMobileMoneySection(),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSearchBar() {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: TextField(
-        decoration: InputDecoration(
-          filled: true,
-          fillColor: Colors.white,
-          hintText: 'Search products...',
-          prefixIcon: const Icon(Icons.search, color: Colors.green),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide.none,
-          ),
         ),
       ),
     );
@@ -97,7 +174,7 @@ class _HomePageState extends State<HomePage> {
       height: 180,
       child: PageView.builder(
         controller: _pageController,
-        itemCount: imgList.length,
+        itemCount: banners.length,
         onPageChanged: (index) {
           setState(() {
             _currentIndex = index;
@@ -105,36 +182,49 @@ class _HomePageState extends State<HomePage> {
         },
         itemBuilder: (context, index) {
           return Container(
-            margin: const EdgeInsets.symmetric(horizontal: 10.0),
+            margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(imgList[index]),
+                image: AssetImage(banners[index].imagePath),
                 fit: BoxFit.cover,
               ),
               borderRadius: BorderRadius.circular(15),
             ),
-            child: const Padding(
-              padding: EdgeInsets.all(15),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Special Offers',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.black.withOpacity(0.6),
+                    Colors.transparent,
+                  ],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.center,
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(15),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      banners[index].title,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  Text(
-                    'Explore the latest deals',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
+                    Text(
+                      banners[index].description,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           );
@@ -146,17 +236,17 @@ class _HomePageState extends State<HomePage> {
   Widget _buildDotsIndicator() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: imgList.asMap().entries.map((entry) {
+      children: banners.asMap().entries.map((entry) {
         return GestureDetector(
           onTap: () {
-            setState(() {
-              _currentIndex = entry.key;
-            });
             _pageController.animateToPage(
               entry.key,
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeInOut,
             );
+            setState(() {
+              _currentIndex = entry.key;
+            });
           },
           child: Container(
             width: 8.0,
@@ -164,9 +254,7 @@ class _HomePageState extends State<HomePage> {
             margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 4.0),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: _currentIndex == entry.key
-                  ? Colors.green
-                  : Colors.grey[300],
+              color: _currentIndex == entry.key ? Colors.green : Colors.grey[300],
             ),
           ),
         );
@@ -175,7 +263,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildCategorySection() {
-    final categories = ["Essentials", "Electronics", "Fashion", "Home"];
+    final categories = ["Reliable", "Trustworthy", "Fast Shipping", "Affordable"];
 
     return Padding(
       padding: const EdgeInsets.only(left: 15, top: 20),
@@ -197,120 +285,170 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+Widget _buildProductCardsSection() {
+  final products = [
+    {'image': 'assets/product1.jpg', 'name': 'Product 1', 'price': 'K10,000'},
+    {'image': 'assets/product2.jpg', 'name': 'Product 2', 'price': 'K15,000'},
+    {'image': 'assets/product3.jpg', 'name': 'Product 3', 'price': 'K12,000'},
+    {'image': 'assets/product4.jpg', 'name': 'Product 4', 'price': 'K8,000'},
+  ];
 
-  Widget _buildPopularProductsSection() {
-    final popularProducts = [
-      {"image": "assets/98.jpg", "name": "Top Sneakers", "price": "\$60"},
-      {"image": "assets/kick.jpg", "name": "Stylish Boots", "price": "\$80"},
-    ];
+  return Padding(
+    padding: const EdgeInsets.all(15.0),
+    child: Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _buildProductCard(products[0]['image']!, products[0]['name']!, products[0]['price']!),
+            _buildProductCard(products[1]['image']!, products[1]['name']!, products[1]['price']!),
+          ],
+        ),
+        SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _buildProductCard(products[2]['image']!, products[2]['name']!, products[2]['price']!),
+            _buildProductCard(products[3]['image']!, products[3]['name']!, products[3]['price']!),
+          ],
+        ),
+      ],
+    ),
+  );
+}
 
-    return Padding(
-      padding: const EdgeInsets.all(15),
+Widget _buildProductCard(String image, String name, String price) {
+  return Expanded(
+    child: Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Text("Popular Products",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-          const SizedBox(height: 10),
-          SizedBox(
-            height: 200,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: popularProducts.length,
-              itemBuilder: (context, index) {
-                return Container(
-                  width: 150,
-                  margin: const EdgeInsets.only(right: 10),
-                  child: _buildProductCard(
-                    popularProducts[index]["image"]!,
-                    popularProducts[index]["name"]!,
-                    popularProducts[index]["price"]!,
-                  ),
-                );
-              },
-            ),
+          Image.asset(image, fit: BoxFit.cover, height: 120, width: 120),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
           ),
+          Text(price, style: const TextStyle(color: Colors.green)),
+        ],
+      ),
+    ),
+  );
+}
+
+
+  Widget _buildMobileMoneySection() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+      child: Column(
+        children: [
+          Text(
+            'Mobile Money Services',
+            style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 10),
+          Row(
+            
+            children: [
+              _buildMobileMoneyCard('Airtel Money', 'assets/airtel_logo.png'),
+              _buildMobileMoneyCard('TNM Mpamba', 'assets/mpamba_logo.png'),
+              _buildMobileMoneyCard('MO626', 'assets/MO626.png'),
+            ],
+          ),
+          SizedBox(height: 20),
         ],
       ),
     );
   }
 
-  Widget _buildNewArrivalsSection() {
-    final newArrivals = [
-      {"image": "assets/98.jpg", "name": "Air Max 98", "price": "\$120"},
-      {"image": "assets/kick.jpg", "name": "Air Jordan", "price": "\$150"},
-    ];
-
-    return Padding(
-      padding: const EdgeInsets.all(15),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text("New Arrivals",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-          const SizedBox(height: 10),
-          GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: newArrivals.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 0.75,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
+  Widget _buildMobileMoneyCard(String serviceName, String imagePath) {
+    return Expanded(
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        child: Column(
+          children: [
+            Image.asset(imagePath, fit: BoxFit.cover, height: 70, width: 70),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(serviceName, style: const TextStyle(fontWeight: FontWeight.bold)),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+Widget _buildSpecialOffersSection() {
+  final specialOffers = [
+    {'image': 'assets/offer1.jpg', 'description': 'Discount on Groceries'},
+    {'image': 'assets/offer2.jpg', 'description': '50% Off on Electronics'},
+    {'image': 'assets/offer3.jpg', 'description': 'Buy 1 Get 1 Free'},
+  ];
+
+  return Padding(
+    padding: const EdgeInsets.all(15.0),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Special Offers',
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 10),
+        SizedBox(
+          height: 120,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: specialOffers.length,
             itemBuilder: (context, index) {
-              return _buildProductCard(
-                newArrivals[index]["image"]!,
-                newArrivals[index]["name"]!,
-                newArrivals[index]["price"]!,
+              return Container(
+                width: 150,
+                margin: const EdgeInsets.only(right: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  image: DecorationImage(
+                    image: AssetImage(specialOffers[index]['image']!),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.black.withOpacity(0.6),
+                        Colors.transparent,
+                      ],
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.center,
+                    ),
+                  ),
+                  padding: const EdgeInsets.all(10),
+                  child: Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Text(
+                      specialOffers[index]['description']!,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
               );
             },
           ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
+}
 
-  Widget _buildProductCard(String image, String name, String price) {
-    return Card(
-      color: Colors.green[50],
-      elevation: 3,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AspectRatio(
-            aspectRatio: 1.0,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
-              ),
-              child: Image.asset(
-                image,
-                fit: BoxFit.cover,
-                width: double.infinity,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(name,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.green)),
-                const SizedBox(height: 5),
-                Text(price,
-                    style: const TextStyle(
-                        color: Colors.orange, fontWeight: FontWeight.bold)),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+
+class BannerModel {
+  final String imagePath;
+  final String title;
+  final String description;
+
+  BannerModel({required this.imagePath, required this.title, required this.description});
 }
