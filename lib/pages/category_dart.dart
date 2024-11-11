@@ -21,13 +21,41 @@ class CategorySection extends StatelessWidget {
         child: GridView.builder(
           itemCount: shoes.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2), 
-          itemBuilder: itemBuilder),
+            crossAxisCount: 2,
+            childAspectRatio: 0.7,
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16), 
+          itemBuilder:(context, index){
+            final shoe = shoes[index];
+
+          }),
         ),
     );
   }
 }
+class CategoryCard extends StatelessWidget {
 
+  final Shoe shoe;
+  const CategoryCard({
+    required this.shoe,
+    super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+
+        children: [
+          Expanded(
+            child:
+          )
+        ],
+      ),
+    );
+  }
+}
 class Shoe {
   final String name;
   final double price;
