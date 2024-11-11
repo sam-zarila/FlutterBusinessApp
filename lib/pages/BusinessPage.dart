@@ -156,7 +156,8 @@ class _HomePageState extends State<HomePage> {
                 child: Text(
                   _greeting,
                   key: ValueKey<String>(_greeting),
-                  style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 25, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -182,7 +183,8 @@ class _HomePageState extends State<HomePage> {
         },
         itemBuilder: (context, index) {
           return Container(
-            margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+            margin:
+                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(banners[index].imagePath),
@@ -254,7 +256,8 @@ class _HomePageState extends State<HomePage> {
             margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 4.0),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: _currentIndex == entry.key ? Colors.green : Colors.grey[300],
+              color:
+                  _currentIndex == entry.key ? Colors.green : Colors.grey[300],
             ),
           ),
         );
@@ -263,7 +266,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildCategorySection() {
-    final categories = ["Reliable", "Trustworthy", "Fast Shipping", "Affordable"];
+    final categories = [
+      "Reliable",
+      "Trustworthy",
+      "Fast Shipping",
+      "Affordable"
+    ];
 
     return Padding(
       padding: const EdgeInsets.only(left: 15, top: 20),
@@ -285,57 +293,62 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-Widget _buildProductCardsSection() {
-  final products = [
-    {'image': 'assets/chips.jpg', 'name': 'chips', 'price': 'K2,500'},
-    {'image': 'assets/food.jpg', 'name': ' chakudya', 'price': 'K15,000'},
-    {'image': 'assets/rice.jpg', 'name': 'Product 3', 'price': 'K12,000'},
-    {'image': 'assets/nsima.jpg', 'name': 'Product 4', 'price': 'K8,000'},
-  ];
 
-  return Padding(
-    padding: const EdgeInsets.all(15.0),
-    child: Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _buildProductCard(products[0]['image']!, products[0]['name']!, products[0]['price']!),
-            _buildProductCard(products[1]['image']!, products[1]['name']!, products[1]['price']!),
-          ],
-        ),
-        SizedBox(height: 20),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _buildProductCard(products[2]['image']!, products[2]['name']!, products[2]['price']!),
-            _buildProductCard(products[3]['image']!, products[3]['name']!, products[3]['price']!),
-          ],
-        ),
-      ],
-    ),
-  );
-}
+  Widget _buildProductCardsSection() {
+    final products = [
+      {'image': 'assets/chips.jpg', 'name': 'chips', 'price': 'K2,500'},
+      {'image': 'assets/food.jpg', 'name': ' chakudya', 'price': 'K15,000'},
+      {'image': 'assets/rice.jpg', 'name': 'Product 3', 'price': 'K12,000'},
+      {'image': 'assets/nsima.jpg', 'name': 'Product 4', 'price': 'K8,000'},
+    ];
 
-Widget _buildProductCard(String image, String name, String price) {
-  return Expanded(
-    child: Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+    return Padding(
+      padding: const EdgeInsets.all(15.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(image, fit: BoxFit.cover, height: 120, width: 120),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _buildProductCard(products[0]['image']!, products[0]['name']!,
+                  products[0]['price']!),
+              _buildProductCard(products[1]['image']!, products[1]['name']!,
+                  products[1]['price']!),
+            ],
           ),
-          Text(price, style: const TextStyle(color: Colors.green)),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _buildProductCard(products[2]['image']!, products[2]['name']!,
+                  products[2]['price']!),
+              _buildProductCard(products[3]['image']!, products[3]['name']!,
+                  products[3]['price']!),
+            ],
+          ),
         ],
       ),
-    ),
-  );
-}
+    );
+  }
 
+  Widget _buildProductCard(String image, String name, String price) {
+    return Expanded(
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset(image, fit: BoxFit.cover, height: 120, width: 120),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(name,
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
+            ),
+            Text(price, style: const TextStyle(color: Colors.green)),
+          ],
+        ),
+      ),
+    );
+  }
 
   Widget _buildMobileMoneySection() {
     return Padding(
@@ -348,7 +361,6 @@ Widget _buildProductCard(String image, String name, String price) {
           ),
           SizedBox(height: 10),
           Row(
-            
             children: [
               _buildMobileMoneyCard('Airtel Money', 'assets/airtel_logo.png'),
               _buildMobileMoneyCard('TNM Mpamba', 'assets/mpamba_logo.png'),
@@ -370,7 +382,8 @@ Widget _buildProductCard(String image, String name, String price) {
             Image.asset(imagePath, fit: BoxFit.cover, height: 70, width: 70),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(serviceName, style: const TextStyle(fontWeight: FontWeight.bold)),
+              child: Text(serviceName,
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
             ),
           ],
         ),
@@ -378,6 +391,7 @@ Widget _buildProductCard(String image, String name, String price) {
     );
   }
 }
+
 Widget _buildSpecialOffersSection() {
   final specialOffers = [
     {'image': 'assets/offer1.jpg', 'description': 'Discount on Groceries'},
@@ -444,11 +458,13 @@ Widget _buildSpecialOffersSection() {
   );
 }
 
-
 class BannerModel {
   final String imagePath;
   final String title;
   final String description;
 
-  BannerModel({required this.imagePath, required this.title, required this.description});
+  BannerModel(
+      {required this.imagePath,
+      required this.title,
+      required this.description});
 }
