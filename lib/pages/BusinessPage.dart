@@ -287,10 +287,10 @@ class _HomePageState extends State<HomePage> {
   }
 Widget _buildProductCardsSection() {
   final products = [
-    {'image': 'assets/product1.jpg', 'name': 'Product 1', 'price': 'K10,000'},
-    {'image': 'assets/product2.jpg', 'name': 'Product 2', 'price': 'K15,000'},
-    {'image': 'assets/product3.jpg', 'name': 'Product 3', 'price': 'K12,000'},
-    {'image': 'assets/product4.jpg', 'name': 'Product 4', 'price': 'K8,000'},
+    {'image': 'assets/chips.jpg', 'name': 'chips', 'price': 'K2,500'},
+    {'image': 'assets/food.jpg', 'name': ' chakudya', 'price': 'K15,000'},
+    {'image': 'assets/rice.jpg', 'name': 'Product 3', 'price': 'K12,000'},
+    {'image': 'assets/nsima.jpg', 'name': 'Product 4', 'price': 'K8,000'},
   ];
 
   return Padding(
@@ -343,7 +343,7 @@ Widget _buildProductCard(String image, String name, String price) {
       child: Column(
         children: [
           Text(
-            'Mobile Money Services',
+            'Our Super App Services',
             style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 10),
