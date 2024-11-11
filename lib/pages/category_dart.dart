@@ -49,10 +49,16 @@ class CategoryCard extends StatelessWidget {
 
         children: [
           Expanded(
-            child:Image.asset(
-              shoe.imageUrl,
-              fit: BoxFit.cover,
+            child: ClipRRect(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(10),),
+
+                 child: Image.asset(
+                shoe.imageUrl,
+                fit: BoxFit.cover,
             )
+            )
+            
+           
           )
         ],
       ),
