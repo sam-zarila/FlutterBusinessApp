@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import '../pages/category_dart.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -164,6 +165,8 @@ class _HomePageState extends State<HomePage> {
             _buildProductCardsSection(),
             const SizedBox(height: 20),
             _buildMobileMoneySection(),
+            // CategorySection()
+
           ],
         ),
       ),

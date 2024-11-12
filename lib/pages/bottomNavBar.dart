@@ -7,6 +7,7 @@ import '../pages/service_Page.dart';
 import '../pages/cart_page.dart';
 import '../services/cart_service.dart';
 import '../pages/BusinessPage.dart';
+//import '../pages/homepage.dart';
 
 class BottomNavbar extends StatefulWidget {
   const BottomNavbar({super.key});
@@ -24,13 +25,15 @@ class _BottomNavbarState extends State<BottomNavbar> {
     super.initState();
     // Initialize pages
     _pages = <Widget>[
-      HomePage(),
+      
+       HomePage(),
+      
       const ServicePage(),
       MarketPage(),
       const AdminLogin(),
       CartPage(
         cartService: CartService('http://10.0.2.2:3000'), // Base URL
-        userId: 1, // Change this as needed
+        userId: 1, 
       ),
     ];
   }

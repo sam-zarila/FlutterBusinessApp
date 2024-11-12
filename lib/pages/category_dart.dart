@@ -20,7 +20,7 @@ class CategorySection extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: GridView.builder(
           itemCount: shoes.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 0.7,
             crossAxisSpacing: 16,
@@ -61,7 +61,23 @@ class CategoryCard extends StatelessWidget {
            
           ),
           Padding(
-            padding: const )
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            
+            child: Text(
+              shoe.name,
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              child: Text(
+                '${shoe.price.toStringAsFixed(2)}',
+                style: TextStyle(fontSize: 14),)),
+
+                
         ],
       ),
     );

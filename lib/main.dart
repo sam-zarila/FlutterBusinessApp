@@ -1,9 +1,9 @@
-import 'package:business/pages/BusinessPage.dart';
+
+//import 'package:business/pages/BusinessPage.dart';
 import 'package:flutter/material.dart';
 import 'theme.dart';
-//import './pages/LoginPage.dart';
-import './pages/signUp.dart';
-// import './pages/bottomNavBar.dart';
+//import './pages/signUp.dart';
+import './pages/bottomNavBar.dart'; // Import BottomNavbar
 
 void main() {
   // Ensure the binding is initialized
@@ -11,12 +11,10 @@ void main() {
 
   runApp(MaterialApp(
     theme: AppTheme.theme,
-    initialRoute: '/',
-    routes: {
-      '/': (context) => HomePage(),
-      '/signup': (context) => SignUpPage(),
-      // '/bottomnavbar': (context) => BottomNavbar(),
-    },
-    // home: BottomNavbar(), // Uncomment this if you plan to use BottomNavbar as the home
+    // Set BottomNavbar as the main entry widget
+    home: BottomNavbar(), 
+    // routes: {
+    //   '/signup': (context) => SignUpPage(),
+    // },
   ));
 }
