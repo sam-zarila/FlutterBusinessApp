@@ -996,11 +996,17 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
 
+import '../services/data.dart';
+
 class ServicePage extends StatelessWidget {
   const ServicePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      
+      appBar: AppBar(
+        title: Text('Our Services'),
+      ),);
   }
 }
