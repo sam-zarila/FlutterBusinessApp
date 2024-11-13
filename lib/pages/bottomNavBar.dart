@@ -28,7 +28,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
       
        HomePage(),
       
-      const ServicePage(),
+       ServicePage(),
       MarketPage(),
       const AdminLogin(),
       CartPage(
