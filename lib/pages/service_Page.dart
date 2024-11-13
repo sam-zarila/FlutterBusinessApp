@@ -1,7 +1,6 @@
-// service_page.dart
+
 import 'package:business/services/data.dart';
-import 'package:flutter/material.dart';
- // Import the service file
+import 'package:flutter/material.dart';// Import the service file
 
 class ServicePage extends StatelessWidget {
   @override
@@ -10,14 +9,24 @@ class ServicePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Services'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListView.builder(
-          itemCount: services.length,
-          itemBuilder: (context, index) {
-            final service = services[index];
-            return ServiceCard(service: service);
-          },
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GridView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: services.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, // Two cards per row
+              mainAxisSpacing: 10.0,
+              crossAxisSpacing: 10.0,
+              childAspectRatio: 0.75, // Adjust as needed to control card height
+            ),
+            itemBuilder: (context, index) {
+              final service = services[index];
+              return ServiceCard(service: service);
+            },
+          ),
         ),
       ),
     );
@@ -32,7 +41,6 @@ class ServiceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(vertical: 10.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
@@ -45,28 +53,28 @@ class ServiceCard extends StatelessWidget {
             child: Image.asset(
               service.imagePath,
               width: double.infinity,
-              height: 150.0,
+              height: 100.0,
               fit: BoxFit.cover,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   service.name,
                   style: TextStyle(
-                    fontSize: 18.0,
+                    fontSize: 16.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 8.0),
+                SizedBox(height: 5.0),
                 Text(
                   service.description,
-                  style: TextStyle(fontSize: 14.0, color: Colors.grey[700]),
+                  style: TextStyle(fontSize: 12.0, color: Colors.grey[700]),
                 ),
-                SizedBox(height: 10.0),
+                SizedBox(height: 5.0),
                 Align(
                   alignment: Alignment.centerRight,
                   child: ElevatedButton(
@@ -74,6 +82,9 @@ class ServiceCard extends StatelessWidget {
                       // Define your visit button functionality here
                     },
                     child: Text('Visit'),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: Size(80, 30),
+                    ),
                   ),
                 ),
               ],
